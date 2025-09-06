@@ -1,0 +1,10 @@
+{
+  "hints": [
+    "Custom error classes extend Error and set this.name",
+    "try/catch blocks can handle specific error types with instanceof",
+    "Returning {success, value, error} objects avoids throwing exceptions",
+    "Array.forEach with try/catch can process items individually",
+    "Circuit breaker pattern prevents cascade failures",
+    "console.error() is useful for logging error details"
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codequest.dev/schemas/UserProgress.schema.json",
+  "title": "User Progress",
+  "description": "Schema for tracking user progress through CodeQuest",
+  "type": "object",
+  "required": ["userId", "scenes", "totalScore", "lastUpdated"],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for the user"
+    },
+    "scenes": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z][0-9]{2}-[a-z0-9-]+$": {
+          "$ref": "#/definitions/SceneProgress"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Progress for each scene, keyed by scene ID"
+    },
+    "totalScore": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total accumulated score across all scenes"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time progress was updated"
+    },
+    "streaks": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Current daily streak"
+        },
+        "longest": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Longest daily streak achieved"
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last activity (YYYY-MM-DD)"
+        }
+      },
+      "description": "Streak tracking information"
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Badge"
+      },
+      "description": "Earned badges and achievements"
+    },
+    "actProgress": {
+      "type": "object",
+      "patternProperties": {
+        "^act[0-9]+$": {
+          "$ref": "#/definitions/ActProgress"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Progress for each act"
+    }
+  },
+  "definitions": {
+    "SceneProgress": {
+      "type": "object",
+      "required": ["status", "attempts", "firstAttempt"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["base", "bonus", "challenge"],
+          "description": "Completion status of the scene"
+        },
+        "attempts": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Number of validation attempts"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Points earned for this scene"
+        },
+        "firstAttempt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of first attempt"
+        },
+        "lastValidation": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last validation"
+        },
+        "completion": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when scene was completed"
+        },
+        "timeSpent": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total time spent in minutes"
+        },
+        "hintsUsed": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of hints requested"
+        },
+        "bonusCriteriaMet": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of bonus criteria that were met"
+        },
+        "challengeCriteriaMet": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of challenge criteria that were met"
+        }
+      }
+    },
+    "Badge": {
+      "type": "object",
+      "required": ["id", "name", "earnedAt"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique badge identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable badge name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of how badge was earned"
+        },
+        "iconUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to badge icon"
+        },
+        "earnedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the badge was earned"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["completion", "streak", "mastery", "help", "special"],
+          "description": "Category of the badge"
+        },
+        "rarity": {
+          "type": "string",
+          "enum": ["common", "uncommon", "rare", "epic", "legendary"],
+          "description": "Rarity level of the badge"
+        }
+      }
+    },
+    "ActProgress": {
+      "type": "object",
+      "required": ["completed", "totalScenes"],
+      "properties": {
+        "completed": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of completed scenes in this act"
+        },
+        "totalScenes": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Total number of scenes in this act"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the act was started"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the act was completed (all scenes done)"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total score for this act"
+        }
+      }
+    }
+  }
+}

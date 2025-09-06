@@ -1,0 +1,253 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "HelpRequest",
+  "title": "Help Request Schema",
+  "description": "Structure d'une demande d'aide via le Panic Button",
+  "type": "object",
+  "required": [
+    "act",
+    "scene",
+    "student",
+    "summary",
+    "failingTests",
+    "timeSpentMin",
+    "hintsUsed",
+    "timestamp"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifiant unique de la demande"
+    },
+    "act": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Acte concerné"
+    },
+    "scene": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 40,
+      "description": "Scène où l'étudiant est bloqué"
+    },
+    "student": {
+      "type": "object",
+      "required": ["name", "team"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID de l'étudiant"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50,
+          "description": "Nom de l'étudiant"
+        },
+        "team": {
+          "type": "string",
+          "description": "Nom de l'équipe"
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Description du blocage par l'étudiant"
+    },
+    "failingTests": {
+      "type": "array",
+      "description": "Tests qui échouent",
+      "items": {
+        "type": "object",
+        "required": ["title", "errorSnippet"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID du test"
+          },
+          "title": {
+            "type": "string",
+            "description": "Titre du test"
+          },
+          "errorSnippet": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Extrait du message d'erreur"
+          },
+          "expected": {
+            "type": "string",
+            "description": "Valeur attendue"
+          },
+          "actual": {
+            "type": "string",
+            "description": "Valeur obtenue"
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 20
+    },
+    "lastStack": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Dernière stack trace capturée"
+    },
+    "fileHint": {
+      "type": "object",
+      "description": "Indice sur le fichier concerné",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Chemin du fichier"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Numéro de ligne"
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Numéro de colonne"
+        }
+      }
+    },
+    "codeContext": {
+      "type": "object",
+      "description": "Contexte du code autour de l'erreur",
+      "properties": {
+        "before": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lignes avant l'erreur"
+        },
+        "current": {
+          "type": "string",
+          "description": "Ligne concernée"
+        },
+        "after": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lignes après l'erreur"
+        }
+      }
+    },
+    "timeSpentMin": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 300,
+      "description": "Temps passé sur cette scène en minutes"
+    },
+    "hintsUsed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Nombre d'indices déjà utilisés"
+    },
+    "attemptCount": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Nombre de tentatives de validation"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$",
+      "description": "Hash MD5 pour éviter les duplicatas"
+    },
+    "buddySuggested": {
+      "type": "string",
+      "description": "Nom du buddy suggéré par le système"
+    },
+    "buddyAccepted": {
+      "type": "boolean",
+      "description": "Si le buddy a accepté d'aider"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date et heure de la demande"
+    },
+    "priority": {
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Priorité calculée automatiquement",
+      "default": "medium"
+    },
+    "status": {
+      "enum": ["pending", "assigned", "in_progress", "resolved", "abandoned"],
+      "description": "Statut de la demande",
+      "default": "pending"
+    },
+    "resolved": {
+      "type": "boolean",
+      "default": false,
+      "description": "Si la demande a été résolue"
+    },
+    "resolvedBy": {
+      "type": "string",
+      "description": "Qui a aidé à résoudre"
+    },
+    "resolutionTime": {
+      "type": "integer",
+      "description": "Temps de résolution en minutes"
+    },
+    "resolutionNotes": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Notes sur la résolution"
+    },
+    "discordMessageId": {
+      "type": "string",
+      "description": "ID du message Discord créé"
+    },
+    "channels": {
+      "type": "array",
+      "description": "Canaux où la demande a été postée",
+      "items": {
+        "enum": ["buddy_dm", "stuck", "general", "formateur"]
+      }
+    }
+  },
+  "examples": [
+    {
+      "act": 2,
+      "scene": 8,
+      "student": {
+        "name": "Alice",
+        "team": "Team Alpha"
+      },
+      "summary": "Je ne comprends pas pourquoi ma promise est rejetée",
+      "failingTests": [
+        {
+          "title": "Should handle async operations",
+          "errorSnippet": "Promise rejected instead of resolved"
+        },
+        {
+          "title": "Should catch errors",
+          "errorSnippet": "Unhandled promise rejection"
+        }
+      ],
+      "lastStack": "Error: Promise rejected\n  at async.js:42:15\n  at processTicksAndRejections",
+      "fileHint": {
+        "path": "async.js",
+        "line": 42
+      },
+      "timeSpentMin": 35,
+      "hintsUsed": 1,
+      "attemptCount": 8,
+      "hash": "a1b2c3d4e5f6789012345678901234567",
+      "buddySuggested": "Charlie",
+      "timestamp": "2025-09-06T10:35:00Z",
+      "priority": "high",
+      "status": "pending",
+      "channels": ["buddy_dm", "stuck"]
+    }
+  ]
+}

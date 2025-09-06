@@ -1,0 +1,10 @@
+{
+  "hints": [
+    "Array.filter() creates a new array with elements that pass a test",
+    "Array.reduce() can build objects by accumulating values",
+    "Object.hasOwnProperty() checks if object has specific property",
+    "Recursive functions can handle nested structures",
+    "Spread operator (...) can merge objects and arrays",
+    "JSON.parse(JSON.stringify()) is simple deep clone for plain objects"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "actId": "act1",
+  "title": "JavaScript Fundamentals & TDD",
+  "description": "Master JavaScript fundamentals while learning Test-Driven Development methodology",
+  "scenes": [
+    {
+      "sceneId": "N00-intro",
+      "path": "N00-intro",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N01-functions",
+      "path": "N01-functions",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N02-arrays-objects",
+      "path": "N02-arrays-objects",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N03-async",
+      "path": "N03-async",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N04-error-handling",
+      "path": "N04-error-handling",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N05-testing",
+      "path": "N05-testing",
+      "optional": false,
+      "bonusOnly": false
+    },
+    {
+      "sceneId": "N06-tdd",
+      "path": "N06-tdd",
+      "optional": false,
+      "bonusOnly": false
+    }
+  ],
+  "prerequisites": [],
+  "estimatedHours": 20,
+  "learningObjectives": [
+    "Master JavaScript ES6+ syntax and features",
+    "Understand functions, scope, and closures",
+    "Work effectively with arrays and objects",
+    "Handle asynchronous programming with Promises",
+    "Implement robust error handling strategies",
+    "Write comprehensive test suites",
+    "Apply Test-Driven Development methodology"
+  ],
+  "tags": [
+    "javascript",
+    "es6",
+    "tdd",
+    "testing",
+    "async",
+    "functions",
+    "objects",
+    "arrays",
+    "error-handling"
+  ],
+  "difficulty": "beginner",
+  "version": "2.3.0"
+}

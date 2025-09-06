@@ -1,0 +1,10 @@
+{
+  "hints": [
+    "Testing frameworks provide describe() and it() for organizing tests",
+    "Assertions should throw errors when conditions fail",
+    "Mock functions track calls and can provide custom implementations",
+    "beforeEach/afterEach hooks run setup/teardown for each test",
+    "Spy functions wrap existing methods to track their usage",
+    "Test runners collect results and provide summary statistics"
+  ]
+}

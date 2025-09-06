@@ -1,0 +1,241 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codequest.dev/schemas/RetroEntry.schema.json",
+  "title": "Retrospective Entry",
+  "description": "Schema for retrospective entries in CodeQuest",
+  "type": "object",
+  "required": ["timestamp", "period", "entries"],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this retrospective was completed"
+    },
+    "period": {
+      "type": "object",
+      "required": ["type", "startDate", "endDate"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["daily", "weekly", "sprint", "act", "custom"],
+          "description": "Type of retrospective period"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the period (YYYY-MM-DD)"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the period (YYYY-MM-DD)"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Period identifier (e.g., 'Week 3', 'Sprint 2', 'act1')"
+        }
+      },
+      "description": "The time period this retrospective covers"
+    },
+    "entries": {
+      "type": "object",
+      "required": ["went_well", "to_improve", "action_items"],
+      "properties": {
+        "went_well": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "What went well during this period (max 500 chars)"
+        },
+        "to_improve": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "What could be improved (max 500 chars)"
+        },
+        "action_items": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Specific actions to take going forward (max 500 chars)"
+        }
+      },
+      "description": "The three-line retrospective format"
+    },
+    "userId": {
+      "type": "string",
+      "description": "User identifier (optional for privacy)"
+    },
+    "teamId": {
+      "type": "string",
+      "description": "Team identifier for team retrospectives"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "scenesCompleted": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of scenes completed in this period"
+        },
+        "totalScore": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Points earned in this period"
+        },
+        "helpRequests": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of help requests made"
+        },
+        "activeHours": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Hours spent actively learning"
+        },
+        "testsWritten": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of tests written"
+        },
+        "refactoringSessions": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Number of refactoring sessions completed"
+        }
+      },
+      "description": "Quantitative metrics for this period"
+    },
+    "mood": {
+      "type": "object",
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Overall mood rating (1-10 scale)"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Confidence level in learning (1-10 scale)"
+        },
+        "motivation": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Motivation level (1-10 scale)"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "excited",
+              "frustrated",
+              "proud",
+              "overwhelmed",
+              "curious",
+              "confident",
+              "stuck",
+              "breakthrough",
+              "tired",
+              "energized"
+            ]
+          },
+          "description": "Mood tags for this period"
+        }
+      },
+      "description": "Subjective mood and feeling indicators"
+    },
+    "achievements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "scene_complete",
+              "badge_earned",
+              "breakthrough",
+              "helping_others",
+              "creative_solution",
+              "persistence",
+              "collaboration"
+            ],
+            "description": "Type of achievement"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Description of the achievement"
+          },
+          "sceneId": {
+            "type": "string",
+            "pattern": "^[A-Z][0-9]{2}-[a-z0-9-]+$",
+            "description": "Related scene ID (if applicable)"
+          }
+        }
+      },
+      "description": "Specific achievements or highlights from this period"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description", "status"],
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Description of the blocker"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "resolved", "needs_help"],
+            "description": "Current status of this blocker"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "technical",
+              "conceptual",
+              "tooling",
+              "environment",
+              "time_management",
+              "motivation"
+            ],
+            "description": "Category of blocker"
+          },
+          "sceneId": {
+            "type": "string",
+            "pattern": "^[A-Z][0-9]{2}-[a-z0-9-]+$",
+            "description": "Related scene ID (if applicable)"
+          }
+        }
+      },
+      "description": "Blockers encountered during this period"
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "shareWithInstructor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to share with instructor"
+        },
+        "shareWithTeam": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to share with team members"
+        },
+        "anonymous": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to anonymize when sharing"
+        }
+      },
+      "description": "Privacy settings for this retrospective"
+    }
+  }
+}

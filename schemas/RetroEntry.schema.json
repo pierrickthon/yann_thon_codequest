@@ -1,0 +1,306 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "RetroEntry",
+  "title": "Retrospective Entry Schema",
+  "description": "Structure d'une entrée de rétrospective quotidienne",
+  "type": "object",
+  "required": [
+    "day",
+    "student",
+    "learned",
+    "fuzzy",
+    "question",
+    "timestamp"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifiant unique de l'entrée"
+    },
+    "day": {
+      "enum": ["J1", "J2", "J3", "J4"],
+      "description": "Jour de la formation"
+    },
+    "student": {
+      "type": "object",
+      "required": ["name", "team"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID de l'étudiant"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50,
+          "description": "Nom de l'étudiant"
+        },
+        "team": {
+          "type": "string",
+          "description": "Nom de l'équipe"
+        }
+      }
+    },
+    "learned": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Un concept/skill acquis aujourd'hui",
+      "examples": [
+        "J'ai compris la différence entre let et const",
+        "Les promises ne sont plus un mystère",
+        "Je sais maintenant utiliser async/await correctement"
+      ]
+    },
+    "fuzzy": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Un point encore flou qui nécessite clarification",
+      "examples": [
+        "La gestion des erreurs dans les promises reste confuse",
+        "Je ne suis pas sûr de quand utiliser useEffect",
+        "Les concepts de closure ne sont pas totalement clairs"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Une question pour le formateur ou pour demain",
+      "examples": [
+        "Quelle est la meilleure pratique pour gérer l'état global?",
+        "Comment débugger efficacement du code asynchrone?",
+        "Peut-on avoir plus d'exemples sur les reducers?"
+      ]
+    },
+    "mood": {
+      "type": "object",
+      "description": "Humeur et ressenti de la journée",
+      "properties": {
+        "emoji": {
+          "enum": ["😊", "😐", "😟", "🚀", "💪", "😵", "🎉"],
+          "description": "Emoji représentant l'humeur"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Niveau de satisfaction (1=très insatisfait, 5=très satisfait)"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Commentaire libre sur l'humeur"
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "description": "Progression de la journée",
+      "properties": {
+        "scenesCompleted": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Nombre de scènes complétées aujourd'hui"
+        },
+        "currentScene": {
+          "type": "integer",
+          "description": "Scène actuelle"
+        },
+        "blockers": {
+          "type": "array",
+          "description": "Points de blocage rencontrés",
+          "items": {
+            "type": "string"
+          }
+        },
+        "achievements": {
+          "type": "array",
+          "description": "Réussites notables du jour",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "collaboration": {
+      "type": "object",
+      "description": "Aspects collaboratifs de la journée",
+      "properties": {
+        "helpedOthers": {
+          "type": "boolean",
+          "description": "A aidé d'autres étudiants"
+        },
+        "receivedHelp": {
+          "type": "boolean",
+          "description": "A reçu de l'aide"
+        },
+        "teamWork": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Commentaire sur le travail d'équipe"
+        },
+        "mentorPoints": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points mentor gagnés aujourd'hui"
+        }
+      }
+    },
+    "suggestions": {
+      "type": "object",
+      "description": "Suggestions d'amélioration",
+      "properties": {
+        "content": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Suggestions pour améliorer le contenu"
+        },
+        "pace": {
+          "enum": ["too_slow", "just_right", "too_fast"],
+          "description": "Feedback sur le rythme"
+        },
+        "support": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Suggestions pour le support formateur"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date et heure de soumission"
+    },
+    "aggregated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Si l'entrée a été incluse dans l'agrégation formateur"
+    },
+    "aggregationTags": {
+      "type": "array",
+      "description": "Tags automatiques pour l'agrégation",
+      "items": {
+        "type": "string",
+        "examples": ["async_confusion", "types_difficulty", "pace_too_fast", "need_more_examples"]
+      }
+    },
+    "visibility": {
+      "enum": ["private", "formateur", "team", "public"],
+      "default": "formateur",
+      "description": "Niveau de visibilité de la rétro"
+    },
+    "formateurNotes": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Notes du formateur sur cette entrée"
+    },
+    "followUp": {
+      "type": "object",
+      "description": "Actions de suivi",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "Nécessite un suivi"
+        },
+        "action": {
+          "type": "string",
+          "description": "Action à prendre"
+        },
+        "assignedTo": {
+          "type": "string",
+          "description": "Personne responsable du suivi"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "completed": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "retro-j1-alice",
+      "day": "J1",
+      "student": {
+        "name": "Alice",
+        "team": "Team Alpha"
+      },
+      "learned": "J'ai compris comment les promises fonctionnent et pourquoi elles sont utiles pour gérer l'asynchrone",
+      "fuzzy": "La différence entre .then() et async/await n'est pas totalement claire pour moi",
+      "question": "Quand doit-on préférer les callbacks aux promises?",
+      "mood": {
+        "emoji": "😊",
+        "level": 4,
+        "comment": "Journée productive, j'ai bien avancé"
+      },
+      "progress": {
+        "scenesCompleted": 6,
+        "currentScene": 7,
+        "blockers": ["Confusion sur les types TypeScript"],
+        "achievements": ["Premier trophée gagné!", "Acte I terminé"]
+      },
+      "collaboration": {
+        "helpedOthers": true,
+        "receivedHelp": true,
+        "teamWork": "Bob m'a aidé sur la scène 5, très sympa",
+        "mentorPoints": 1
+      },
+      "suggestions": {
+        "pace": "just_right",
+        "content": "Plus d'exemples sur les promises seraient utiles"
+      },
+      "timestamp": "2025-09-06T17:15:00Z",
+      "aggregated": false,
+      "aggregationTags": ["async_confusion", "types_difficulty"],
+      "visibility": "formateur"
+    },
+    {
+      "id": "retro-j2-david",
+      "day": "J2",
+      "student": {
+        "name": "David",
+        "team": "Team Charlie"
+      },
+      "learned": "Les hooks React sont plus simples que je ne pensais, useState est vraiment intuitif",
+      "fuzzy": "useEffect et ses dépendances restent mystérieux",
+      "question": "Comment débugger quand useEffect boucle infiniment?",
+      "mood": {
+        "emoji": "😟",
+        "level": 3,
+        "comment": "Difficile en remote, je me sens un peu isolé"
+      },
+      "progress": {
+        "scenesCompleted": 3,
+        "currentScene": 11,
+        "blockers": ["Problème de connexion", "Confusion sur les reducers"],
+        "achievements": ["Badge Sprinteur obtenu"]
+      },
+      "collaboration": {
+        "helpedOthers": false,
+        "receivedHelp": false,
+        "teamWork": "Difficile de collaborer à distance"
+      },
+      "suggestions": {
+        "pace": "too_fast",
+        "support": "Plus de check-ins en remote seraient appréciés"
+      },
+      "timestamp": "2025-09-07T17:00:00Z",
+      "aggregated": true,
+      "aggregationTags": ["remote_difficulty", "pace_too_fast", "hooks_confusion"],
+      "visibility": "formateur",
+      "followUp": {
+        "required": true,
+        "action": "Session de rattrapage sur les hooks",
+        "assignedTo": "Formateur",
+        "dueDate": "2025-09-08"
+      }
+    }
+  ]
+}

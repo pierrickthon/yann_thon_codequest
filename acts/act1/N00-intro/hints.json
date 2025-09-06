@@ -1,0 +1,9 @@
+{
+  "hints": [
+    "Use the + operator for addition",
+    "The modulo operator (%) can help check if a number is even",
+    "Ternary operator (condition ? true : false) is useful for comparisons",
+    "Template literals use backticks and ${} for string interpolation",
+    "A for loop can build arrays incrementally"
+  ]
+}

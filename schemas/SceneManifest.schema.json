@@ -1,0 +1,316 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "SceneManifest",
+  "title": "Scene Manifest Schema",
+  "description": "Définit la structure d'une scène/niveau dans CodeQuest",
+  "type": "object",
+  "required": ["id", "act", "title", "type", "objectives", "tests", "validation"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 40,
+      "description": "Identifiant unique de la scène"
+    },
+    "act": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Acte auquel appartient la scène"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 100,
+      "description": "Titre de la scène"
+    },
+    "type": {
+      "enum": ["core", "stretch", "boss"],
+      "description": "Type de scène"
+    },
+    "objectives": {
+      "type": "array",
+      "description": "Objectifs pédagogiques de la scène",
+      "items": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 200
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "tests": {
+      "type": "array",
+      "description": "Tests à faire passer",
+      "items": {
+        "$ref": "#/definitions/TestSpec"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "hints": {
+      "type": "array",
+      "description": "Indices progressifs disponibles",
+      "items": {
+        "$ref": "#/definitions/Hint"
+      },
+      "maxItems": 3
+    },
+    "validation": {
+      "$ref": "#/definitions/ValidationCriteria"
+    },
+    "challenge": {
+      "type": "object",
+      "description": "Défi optionnel pour le trophée",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description du défi"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Pseudo-code de la condition de validation"
+        },
+        "hint": {
+          "type": "string",
+          "description": "Indice pour le défi"
+        }
+      },
+      "required": ["description", "condition"]
+    },
+    "estimatedTime": {
+      "type": "integer",
+      "description": "Temps estimé en minutes",
+      "minimum": 5,
+      "maximum": 60
+    },
+    "difficulty": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 1.0,
+      "description": "Niveau de difficulté (0.1=facile, 1.0=très difficile)"
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Scènes prérequises",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "files": {
+      "type": "object",
+      "description": "Fichiers associés à la scène",
+      "properties": {
+        "starter": {
+          "type": "string",
+          "description": "Fichier de départ"
+        },
+        "solution": {
+          "type": "string",
+          "description": "Solution de référence (cachée)"
+        },
+        "tests": {
+          "type": "string",
+          "description": "Fichier de tests"
+        },
+        "readme": {
+          "type": "string",
+          "description": "Instructions pour l'étudiant"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TestSpec": {
+      "type": "object",
+      "required": ["id", "title", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^test-[0-9]+$",
+          "description": "Identifiant unique du test"
+        },
+        "title": {
+          "type": "string",
+          "description": "Description du test"
+        },
+        "type": {
+          "enum": ["unit", "integration", "e2e"],
+          "description": "Type de test"
+        },
+        "critical": {
+          "type": "boolean",
+          "default": false,
+          "description": "Si ce test est critique pour la validation"
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Points attribués pour ce test"
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Timeout en millisecondes",
+          "default": 5000
+        }
+      }
+    },
+    "Hint": {
+      "type": "object",
+      "required": ["level", "content", "cost"],
+      "properties": {
+        "level": {
+          "enum": ["H1", "H2", "H3"],
+          "description": "Niveau d'indice (H1=léger, H3=solution partielle)"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 1000,
+          "description": "Contenu de l'indice"
+        },
+        "cost": {
+          "type": "object",
+          "properties": {
+            "starEligibility": {
+              "type": "boolean",
+              "description": "Impact sur l'éligibilité à l'étoile"
+            },
+            "timePenalty": {
+              "type": "integer",
+              "description": "Pénalité de temps en secondes"
+            },
+            "pointsPenalty": {
+              "type": "integer",
+              "description": "Points perdus"
+            }
+          }
+        },
+        "unlockAfter": {
+          "type": "integer",
+          "description": "Débloqué après X minutes",
+          "minimum": 0,
+          "maximum": 60
+        }
+      }
+    },
+    "ValidationCriteria": {
+      "type": "object",
+      "required": ["base"],
+      "properties": {
+        "base": {
+          "type": "object",
+          "description": "Critères pour validation de base (✅)",
+          "properties": {
+            "allTestsPass": {
+              "type": "boolean",
+              "const": true
+            },
+            "noCompilationErrors": {
+              "type": "boolean",
+              "const": true
+            },
+            "minTestsPass": {
+              "type": "integer",
+              "description": "Nombre minimum de tests à passer"
+            }
+          }
+        },
+        "star": {
+          "type": "object",
+          "description": "Critères pour l'étoile (⭐)",
+          "properties": {
+            "timeUnder": {
+              "type": "integer",
+              "description": "Temps maximum en secondes"
+            },
+            "noHints": {
+              "type": "boolean",
+              "description": "Aucun indice utilisé"
+            },
+            "eleganceScore": {
+              "type": "number",
+              "description": "Score d'élégance minimum"
+            },
+            "customCondition": {
+              "type": "string",
+              "description": "Condition personnalisée en pseudo-code"
+            }
+          }
+        },
+        "trophy": {
+          "type": "object",
+          "description": "Critères pour le trophée (🏆)",
+          "properties": {
+            "customCondition": {
+              "type": "string",
+              "description": "Condition spécifique au défi"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description du défi pour l'étudiant"
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": 3,
+      "act": 1,
+      "title": "Variables et Types",
+      "type": "core",
+      "objectives": [
+        "Comprendre les types de données JavaScript",
+        "Maîtriser la déclaration de variables",
+        "Différencier let, const et var"
+      ],
+      "tests": [
+        {
+          "id": "test-1",
+          "title": "Should declare a const variable",
+          "type": "unit",
+          "critical": true
+        },
+        {
+          "id": "test-2",
+          "title": "Should handle type conversion",
+          "type": "unit",
+          "critical": false
+        }
+      ],
+      "hints": [
+        {
+          "level": "H1",
+          "content": "Pensez à la différence entre const et let...",
+          "cost": {
+            "starEligibility": true,
+            "timePenalty": 60
+          }
+        }
+      ],
+      "validation": {
+        "base": {
+          "allTestsPass": true,
+          "noCompilationErrors": true
+        },
+        "star": {
+          "timeUnder": 600,
+          "noHints": true
+        },
+        "trophy": {
+          "customCondition": "codeLength < 5 lines",
+          "description": "Compléter en moins de 5 lignes"
+        }
+      },
+      "challenge": {
+        "description": "Résoudre en utilisant uniquement const",
+        "condition": "!code.includes('let') && !code.includes('var')"
+      },
+      "estimatedTime": 15,
+      "difficulty": 0.2
+    }
+  ]
+}

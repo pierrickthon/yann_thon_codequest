@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeQuest Control Room</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 CodeQuest Control Room</h1>
+            <p class="subtitle">Monitor progress and assist learners</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="progress-percentage">--%</div>
+                        <div class="stat-label">Overall Progress</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="completed-scenes">--</div>
+                        <div class="stat-label">Scenes Completed</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🆘</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="help-requests">--</div>
+                        <div class="stat-label">Help Requests</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="last-update">--:--</div>
+                        <div class="stat-label">Last Update</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Section -->
+            <section class="section">
+                <h2>📈 Learning Progress</h2>
+                <div class="progress-container">
+                    <div id="progress-list" class="progress-list">
+                        <div class="loading">Loading progress data...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Help Requests Section -->
+            <section class="section">
+                <h2>🆘 Recent Help Requests</h2>
+                <div class="help-container">
+                    <div id="help-list" class="help-list">
+                        <div class="loading">Loading help requests...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions Section -->
+            <section class="section">
+                <h2>🔧 Quick Actions</h2>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="refreshData()">
+                        🔄 Refresh Data
+                    </button>
+                    <button class="action-btn" onclick="openTerminal()">
+                        💻 Open Terminal
+                    </button>
+                    <button class="action-btn" onclick="viewLogs()">
+                        📋 View Logs
+                    </button>
+                    <button class="action-btn" onclick="exportData()">
+                        📤 Export Data
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>CodeQuest 2.3 MVP - Stack-agnostic Learning Platform</p>
+            <p class="status" id="connection-status">🟢 Connected</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

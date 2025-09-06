@@ -1,0 +1,292 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "FastTrackAttempt",
+  "title": "Fast Track Attempt Schema",
+  "description": "Structure d'une tentative de Fast Track (challenge 2h par acte)",
+  "type": "object",
+  "required": [
+    "act",
+    "student",
+    "startTimestamp",
+    "targetDuration"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifiant unique de la tentative"
+    },
+    "act": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Acte concerné par le Fast Track"
+    },
+    "student": {
+      "type": "object",
+      "required": ["name", "team"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID de l'étudiant"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50,
+          "description": "Nom de l'étudiant"
+        },
+        "team": {
+          "type": "string",
+          "description": "Nom de l'équipe"
+        }
+      }
+    },
+    "startTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Heure de début du Fast Track"
+    },
+    "endTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Heure de fin (réelle ou prévue)"
+    },
+    "targetDuration": {
+      "type": "integer",
+      "const": 7200,
+      "description": "Durée cible en secondes (2 heures)"
+    },
+    "scenes": {
+      "type": "object",
+      "description": "Détail des scènes de l'acte",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Nombre total de scènes à compléter"
+        },
+        "list": {
+          "type": "array",
+          "description": "Liste des IDs de scènes",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "completed": {
+          "type": "array",
+          "description": "Scènes complétées",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "completedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timeSpent": {
+                "type": "integer",
+                "description": "Temps en secondes"
+              }
+            }
+          }
+        }
+      }
+    },
+    "scenesTried": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Nombre de scènes tentées"
+    },
+    "scenesCompleted": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Nombre de scènes complétées avec succès"
+    },
+    "hintsUsed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Nombre total d'indices utilisés"
+    },
+    "maxHintsAllowed": {
+      "type": "integer",
+      "default": 2,
+      "description": "Nombre maximum d'indices autorisés"
+    },
+    "status": {
+      "enum": ["active", "completed", "failed", "aborted"],
+      "description": "Statut de la tentative",
+      "default": "active"
+    },
+    "success": {
+      "type": "boolean",
+      "description": "Si le Fast Track a été réussi"
+    },
+    "finalTime": {
+      "type": "integer",
+      "description": "Temps final en secondes"
+    },
+    "abortReason": {
+      "type": "string",
+      "enum": ["timeout", "user_abort", "too_many_hints", "technical_issue", "help_requested"],
+      "description": "Raison de l'échec/abandon"
+    },
+    "checkpoints": {
+      "type": "array",
+      "description": "Points de contrôle temporels",
+      "items": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "integer",
+            "description": "Temps écoulé en secondes"
+          },
+          "scenesCompleted": {
+            "type": "integer"
+          },
+          "pace": {
+            "enum": ["ahead", "on_track", "behind"],
+            "description": "Rythme par rapport à l'objectif"
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Avertissements envoyés pendant le Fast Track",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "type": {
+            "enum": ["time_warning", "hint_warning", "pace_warning"]
+          }
+        }
+      }
+    },
+    "badge": {
+      "type": "object",
+      "description": "Badge gagné si réussi",
+      "properties": {
+        "awarded": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string",
+          "const": "Fast-Tracker"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistiques détaillées",
+      "properties": {
+        "averageTimePerScene": {
+          "type": "number",
+          "description": "Temps moyen par scène en secondes"
+        },
+        "fastestScene": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "time": {
+              "type": "integer"
+            }
+          }
+        },
+        "slowestScene": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "time": {
+              "type": "integer"
+            }
+          }
+        },
+        "validationAttempts": {
+          "type": "integer",
+          "description": "Nombre total de tentatives de validation"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "ft-2025-09-06-001",
+      "act": 2,
+      "student": {
+        "name": "Charlie",
+        "team": "Team Bravo"
+      },
+      "startTimestamp": "2025-09-06T14:00:00Z",
+      "endTimestamp": "2025-09-06T15:53:00Z",
+      "targetDuration": 7200,
+      "scenes": {
+        "total": 6,
+        "list": [7, 8, 9, 10, 11, 12],
+        "completed": [
+          {
+            "id": 7,
+            "completedAt": "2025-09-06T14:15:00Z",
+            "timeSpent": 900
+          },
+          {
+            "id": 8,
+            "completedAt": "2025-09-06T14:35:00Z",
+            "timeSpent": 1200
+          }
+        ]
+      },
+      "scenesTried": 6,
+      "scenesCompleted": 6,
+      "hintsUsed": 1,
+      "maxHintsAllowed": 2,
+      "status": "completed",
+      "success": true,
+      "finalTime": 6780,
+      "checkpoints": [
+        {
+          "time": 1800,
+          "scenesCompleted": 2,
+          "pace": "on_track"
+        },
+        {
+          "time": 3600,
+          "scenesCompleted": 4,
+          "pace": "ahead"
+        }
+      ],
+      "badge": {
+        "awarded": true,
+        "name": "Fast-Tracker",
+        "details": "Act II complété en 1h53min"
+      },
+      "statistics": {
+        "averageTimePerScene": 1130,
+        "fastestScene": {
+          "id": 10,
+          "time": 480
+        },
+        "slowestScene": {
+          "id": 11,
+          "time": 1800
+        },
+        "validationAttempts": 8
+      }
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ActManifest",
+  "title": "Act Manifest Schema",
+  "description": "Définit la structure d'un acte dans CodeQuest",
+  "type": "object",
+  "required": ["id", "title", "metaphor", "scenes", "blueprint"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Identifiant unique de l'acte (1-4)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 50,
+      "description": "Titre de l'acte",
+      "examples": ["Fondations", "Structures", "Interactions", "Maîtrise"]
+    },
+    "metaphor": {
+      "type": "string",
+      "description": "Métaphore architecturale de l'acte",
+      "examples": ["Poser les fondations de votre cité numérique"]
+    },
+    "scenes": {
+      "type": "object",
+      "required": ["core"],
+      "properties": {
+        "core": {
+          "type": "array",
+          "description": "Scènes principales obligatoires",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40
+          },
+          "minItems": 6,
+          "maxItems": 7
+        },
+        "stretch": {
+          "type": "array",
+          "description": "Scènes bonus optionnelles",
+          "items": {
+            "type": "integer",
+            "minimum": 26,
+            "maximum": 40
+          },
+          "maxItems": 5
+        }
+      }
+    },
+    "blueprint": {
+      "$ref": "#/definitions/Blueprint"
+    },
+    "unlockConditions": {
+      "type": "object",
+      "description": "Conditions pour débloquer cet acte",
+      "properties": {
+        "previousActComplete": {
+          "type": "boolean",
+          "description": "L'acte précédent doit être terminé"
+        },
+        "minScenesComplete": {
+          "type": "integer",
+          "description": "Nombre minimum de scènes à compléter"
+        },
+        "requiredBadges": {
+          "type": "array",
+          "description": "Badges requis pour débloquer",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "estimatedDuration": {
+      "type": "integer",
+      "description": "Durée estimée en minutes",
+      "minimum": 60,
+      "maximum": 480
+    }
+  },
+  "definitions": {
+    "Blueprint": {
+      "type": "object",
+      "required": ["objectives", "pitfalls", "concepts"],
+      "properties": {
+        "objectives": {
+          "type": "array",
+          "description": "Objectifs pédagogiques de l'acte",
+          "items": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "minItems": 2,
+          "maxItems": 5
+        },
+        "pitfalls": {
+          "type": "array",
+          "description": "Pièges courants à éviter",
+          "items": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "maxItems": 5
+        },
+        "concepts": {
+          "type": "array",
+          "description": "Concepts clés enseignés",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50
+          },
+          "minItems": 3,
+          "maxItems": 10
+        },
+        "visualRef": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL vers une représentation visuelle"
+        },
+        "architecturalTone": {
+          "type": "string",
+          "description": "Ton architectural de la présentation",
+          "examples": ["Nous posons les fondations solides de votre cité"]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": 1,
+      "title": "Fondations",
+      "metaphor": "Poser les bases solides de votre cité numérique",
+      "scenes": {
+        "core": [1, 2, 3, 4, 5, 6],
+        "stretch": [26, 27]
+      },
+      "blueprint": {
+        "objectives": [
+          "Maîtriser les bases HTML/CSS/JS",
+          "Comprendre la manipulation du DOM",
+          "Apprendre les fonctions et variables"
+        ],
+        "pitfalls": [
+          "Ne pas tester son code régulièrement",
+          "Ignorer les erreurs de la console"
+        ],
+        "concepts": [
+          "Variables",
+          "Fonctions",
+          "DOM",
+          "Events",
+          "CSS Selectors"
+        ]
+      },
+      "estimatedDuration": 180
+    }
+  ]
+}

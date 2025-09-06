@@ -1,0 +1,246 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ActivityPing",
+  "title": "Activity Ping Schema",
+  "description": "Structure d'un ping d'activité pour le monitoring à distance",
+  "type": "object",
+  "required": [
+    "student",
+    "lastActivityTimestamp",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifiant unique du ping"
+    },
+    "student": {
+      "type": "object",
+      "required": ["name", "team"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID de l'étudiant"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50,
+          "description": "Nom de l'étudiant"
+        },
+        "team": {
+          "type": "string",
+          "description": "Nom de l'équipe"
+        },
+        "buddy": {
+          "type": "string",
+          "description": "Buddy assigné"
+        }
+      }
+    },
+    "lastActivityTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage de la dernière activité détectée"
+    },
+    "source": {
+      "enum": ["commit", "local-log", "validation", "help-request", "hint-used", "file-save", "test-run"],
+      "description": "Source de l'activité détectée"
+    },
+    "inactivityDuration": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Durée d'inactivité en minutes"
+    },
+    "currentScene": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 40,
+      "description": "Scène actuelle de l'étudiant"
+    },
+    "currentAct": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Acte actuel de l'étudiant"
+    },
+    "pingType": {
+      "enum": ["gentle", "warning", "urgent", "critical"],
+      "description": "Type de ping selon la durée d'inactivité",
+      "default": "gentle"
+    },
+    "thresholds": {
+      "type": "object",
+      "description": "Seuils de déclenchement",
+      "properties": {
+        "gentle": {
+          "type": "integer",
+          "default": 60,
+          "description": "Minutes avant ping gentle"
+        },
+        "warning": {
+          "type": "integer",
+          "default": 90,
+          "description": "Minutes avant ping warning"
+        },
+        "urgent": {
+          "type": "integer",
+          "default": 120,
+          "description": "Minutes avant ping urgent"
+        },
+        "critical": {
+          "type": "integer",
+          "default": 180,
+          "description": "Minutes avant ping critical"
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Message personnalisé envoyé à l'étudiant"
+    },
+    "messageTemplate": {
+      "type": "string",
+      "description": "Template utilisé pour le message",
+      "examples": [
+        "Hey {{name}}, tout va bien? Pas d'activité depuis {{duration}} min. Besoin d'aide?",
+        "{{name}}, on ne te voit plus depuis {{duration}} min. Utilise 'help-me' si tu es bloqué!"
+      ]
+    },
+    "channels": {
+      "type": "array",
+      "description": "Canaux de communication utilisés",
+      "items": {
+        "enum": ["discord_dm", "discord_general", "email", "dashboard", "slack"]
+      },
+      "default": ["discord_dm", "dashboard"]
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage de l'envoi du ping"
+    },
+    "acknowledged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Si l'étudiant a accusé réception"
+    },
+    "acknowledgedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage de l'accusé de réception"
+    },
+    "response": {
+      "type": "object",
+      "description": "Réponse de l'étudiant au ping",
+      "properties": {
+        "status": {
+          "enum": ["working", "stuck", "break", "technical_issue", "finished"]
+        },
+        "message": {
+          "type": "string"
+        },
+        "needsHelp": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Métadonnées additionnelles",
+      "properties": {
+        "lastValidation": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastError": {
+          "type": "string"
+        },
+        "progressToday": {
+          "type": "integer",
+          "description": "Scènes complétées aujourd'hui"
+        },
+        "isRemoteDay": {
+          "type": "boolean",
+          "description": "Si c'est un jour de travail à distance"
+        }
+      }
+    },
+    "escalation": {
+      "type": "object",
+      "description": "Escalade si pas de réponse",
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "nextPingAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notifyFormateur": {
+          "type": "boolean",
+          "default": false
+        },
+        "notifyBuddy": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "ping-001",
+      "student": {
+        "name": "Alice",
+        "team": "Team Alpha",
+        "buddy": "Bob"
+      },
+      "lastActivityTimestamp": "2025-09-06T12:00:00Z",
+      "source": "validation",
+      "inactivityDuration": 75,
+      "currentScene": 14,
+      "currentAct": 3,
+      "pingType": "gentle",
+      "message": "Hey Alice, tout va bien? Pas d'activité depuis 75 min. Besoin d'aide sur la scène 14?",
+      "channels": ["discord_dm", "dashboard"],
+      "sentAt": "2025-09-06T13:15:00Z",
+      "metadata": {
+        "lastValidation": "2025-09-06T11:45:00Z",
+        "progressToday": 2,
+        "isRemoteDay": true
+      },
+      "escalation": {
+        "level": 1,
+        "nextPingAt": "2025-09-06T13:45:00Z",
+        "notifyFormateur": false,
+        "notifyBuddy": false
+      }
+    },
+    {
+      "id": "ping-002",
+      "student": {
+        "name": "David",
+        "team": "Team Charlie"
+      },
+      "lastActivityTimestamp": "2025-09-06T10:00:00Z",
+      "source": "help-request",
+      "inactivityDuration": 180,
+      "currentScene": 8,
+      "currentAct": 2,
+      "pingType": "critical",
+      "message": "David, cela fait 3 heures sans activité. Tout va bien? Le formateur va être notifié.",
+      "channels": ["discord_dm", "discord_general", "dashboard"],
+      "sentAt": "2025-09-06T13:00:00Z",
+      "escalation": {
+        "level": 3,
+        "notifyFormateur": true,
+        "notifyBuddy": true
+      }
+    }
+  ]
+}

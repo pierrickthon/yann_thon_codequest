@@ -1,0 +1,10 @@
+{
+  "hints": [
+    "TDD cycle: Red (failing test) → Green (minimal code) → Refactor (improve)",
+    "Write the simplest test first, then make it pass",
+    "Test edge cases like zero, negative numbers, and invalid inputs",
+    "Each test should focus on one specific behavior",
+    "Refactor only when tests are green (passing)",
+    "Test error conditions with assertThrows or try/catch blocks"
+  ]
+}

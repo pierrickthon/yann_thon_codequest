@@ -1,0 +1,10 @@
+{
+  "hints": [
+    "Promise constructor takes (resolve, reject) => {} function",
+    "setTimeout can be wrapped in Promise for delays",
+    "Promise.race resolves with first completed promise",
+    "try/catch works with async/await for error handling",
+    "Promise.all waits for all promises, fails if any fail",
+    "Exponential backoff: delay = baseDelay * Math.pow(2, attempt)"
+  ]
+}

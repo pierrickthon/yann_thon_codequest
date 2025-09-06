@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codequest.dev/schemas/ActManifest.schema.json",
+  "title": "Act Manifest",
+  "description": "Defines the structure and metadata for a CodeQuest Act",
+  "type": "object",
+  "required": ["actId", "title", "description", "scenes", "prerequisites", "estimatedHours"],
+  "properties": {
+    "actId": {
+      "type": "string",
+      "pattern": "^act[0-9]+$",
+      "description": "Unique identifier for the act (e.g., 'act1', 'act2')"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Human-readable title of the act"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Brief description of what this act covers"
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/SceneRef"
+      },
+      "description": "Ordered list of scenes in this act"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of prerequisite acts or skills"
+    },
+    "estimatedHours": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 100,
+      "description": "Estimated completion time in hours"
+    },
+    "learningObjectives": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "List of learning objectives for this act"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "description": "Technology tags (e.g., 'javascript', 'tdd', 'async')"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "Difficulty level of this act"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this act manifest"
+    }
+  },
+  "definitions": {
+    "SceneRef": {
+      "type": "object",
+      "required": ["sceneId", "path"],
+      "properties": {
+        "sceneId": {
+          "type": "string",
+          "pattern": "^[A-Z][0-9]{2}-[a-z0-9-]+$",
+          "description": "Scene identifier (e.g., 'N00-intro', 'N01-functions')"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9/_-]+$",
+          "description": "Relative path to scene directory"
+        },
+        "optional": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this scene is optional for act completion"
+        },
+        "bonusOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this scene is only for bonus points"
+        }
+      }
+    }
+  }
+}

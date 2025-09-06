@@ -1,0 +1,9 @@
+{
+  "hints": [
+    "Closures capture variables from outer scope",
+    "Array methods like map, filter, reduce are higher-order functions",
+    "Function composition applies functions from right to left: f(g(x))",
+    "Memoization stores results in a cache (Map or object)",
+    "Function.prototype.bind creates a new function with fixed context"
+  ]
+}

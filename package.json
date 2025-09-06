@@ -1,0 +1,25 @@
+{
+  "name": "codequest",
+  "version": "2.3.0",
+  "description": "CodeQuest - Gamified Learning Platform MVP",
+  "main": "src/cli/index.js",
+  "bin": {
+    "cq": "./src/cli/index.js"
+  },
+  "scripts": {
+    "start": "node src/cli/index.js",
+    "validate": "node src/cli/index.js validate",
+    "help-me": "node src/cli/index.js help-me",
+    "challenge-mode": "node src/cli/index.js challenge-mode",
+    "test": "node src/test-runner.js",
+    "control-room": "node src/control-room/server.js"
+  },
+  "keywords": ["education", "gamification", "tdd", "javascript", "typescript"],
+  "author": "CodeQuest Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
