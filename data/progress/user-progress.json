@@ -1,0 +1,15 @@
+{
+  "scenes": {
+    "N00-intro": {
+      "status": "bonus",
+      "lastValidation": "2025-09-06T23:07:33.593Z",
+      "attempts": 1
+    },
+    "N01-functions": {
+      "status": "bonus",
+      "lastValidation": "2025-09-07T16:54:48.155Z",
+      "attempts": 3
+    }
+  },
+  "totalScore": 0
+}

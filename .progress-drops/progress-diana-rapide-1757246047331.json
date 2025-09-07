@@ -1,0 +1,60 @@
+{
+  "studentId": "diana-rapide",
+  "studentName": "Diana",
+  "currentScene": "completed",
+  "scenes": {
+    "N00-warmup": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T07:54:07.331Z",
+      "timeSpent": 3,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N01-variables": {
+      "status": "bonus",
+      "completedAt": "2025-09-01T09:54:07.331Z",
+      "timeSpent": 7,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N02-immutability": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T11:54:07.331Z",
+      "timeSpent": 10,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N03-destructuring": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T13:54:07.331Z",
+      "timeSpent": 8,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N04-collections": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T15:54:07.331Z",
+      "timeSpent": 13,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N05-modules": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T17:54:07.331Z",
+      "timeSpent": 10,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N06-boss": {
+      "status": "challenge",
+      "completedAt": "2025-09-01T19:54:07.331Z",
+      "timeSpent": 17,
+      "testsPass": true,
+      "hintsUsed": 0
+    }
+  },
+  "totalScore": 1350,
+  "hintsUsed": {},
+  "startedAt": "2025-09-01T07:54:07.331Z",
+  "lastUpdated": "2025-09-07T11:54:07.331Z"
+}

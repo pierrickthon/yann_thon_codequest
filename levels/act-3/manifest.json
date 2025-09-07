@@ -1,0 +1,113 @@
+{
+  "id": "act-3",
+  "title": "Interactions & Types",
+  "version": "2.3.0",
+  "description": "TypeScript mastery: inférence, interfaces, unions, generics, migration",
+  "estimatedDuration": "180min",
+  "fastTrack": {
+    "available": true,
+    "duration": 120,
+    "maxHints": 2,
+    "requiredScenes": 6,
+    "badge": "TypeScript Wizard"
+  },
+  "scenes": {
+    "core": [
+      "N13-types-inference",
+      "N14-interfaces-vs-types", 
+      "N15-unions-type-guards",
+      "N16-generics-reusability",
+      "N17-mapped-utility-types",
+      "N18-boss-migration-strict"
+    ]
+  },
+  "sceneDetails": [
+    {
+      "id": "N13",
+      "name": "types-inference",
+      "title": "Types & Inférence",
+      "description": "Inférence correcte, primitifs, fonctions typées",
+      "estimatedTime": 15,
+      "difficulty": 2,
+      "concepts": ["type inference", "primitive types", "function typing", "unknown vs any"],
+      "trophyCondition": "Zéro any explicite et zéro @ts-ignore",
+      "dependencies": []
+    },
+    {
+      "id": "N14", 
+      "name": "interfaces-vs-types",
+      "title": "Interfaces vs Types",
+      "description": "Composition, extension, readonly, intersection",
+      "estimatedTime": 18,
+      "difficulty": 2,
+      "concepts": ["interfaces", "type aliases", "composition", "readonly"],
+      "trophyCondition": "Pas de duplication (mapped type pour DRY)",
+      "dependencies": ["N13"]
+    },
+    {
+      "id": "N15",
+      "name": "unions-type-guards", 
+      "title": "Unions & Type Guards",
+      "description": "Discriminated unions + guards, exhaustivité via never",
+      "estimatedTime": 20,
+      "difficulty": 3,
+      "concepts": ["discriminated unions", "type guards", "never type", "exhaustiveness"],
+      "trophyCondition": "Switch exhaustif (aucun default), check never testé",
+      "dependencies": ["N14"]
+    },
+    {
+      "id": "N16",
+      "name": "generics-reusability",
+      "title": "Generics & Reusability", 
+      "description": "Fonctions/containers génériques avec contraintes",
+      "estimatedTime": 22,
+      "difficulty": 3,
+      "concepts": ["generic functions", "generic constraints", "Result<T,E>", "container types"],
+      "trophyCondition": "Contrainte extends, pas de any masqué",
+      "dependencies": ["N15"]
+    },
+    {
+      "id": "N17",
+      "name": "mapped-utility-types",
+      "title": "Mapped & Utility Types",
+      "description": "Partial, Pick, Omit, mapped custom DeepReadonly",
+      "estimatedTime": 25,
+      "difficulty": 3,
+      "concepts": ["utility types", "mapped types", "conditional types", "deep transformations"],
+      "trophyCondition": "DeepReadonly limité (1 niveau) sans lib externe",
+      "dependencies": ["N16"]
+    },
+    {
+      "id": "N18",
+      "name": "boss-migration-strict",
+      "title": "Boss: Migration Strict",
+      "description": "Migration complète Acte I en TS strict niveau 3",
+      "estimatedTime": 30,
+      "difficulty": 4,
+      "concepts": ["strict mode", "migration", "type guards", "safe APIs"],
+      "trophyCondition": "0 any, 0 @ts-ignore, 0 erreurs TS niveau 3",
+      "dependencies": ["N17"],
+      "isBoss": true
+    }
+  ],
+  "prerequisites": {
+    "acts": [1, 2],
+    "concepts": ["async/await", "promises", "error handling"]
+  },
+  "learningObjectives": [
+    "Maîtriser l'inférence de types TypeScript",
+    "Utiliser interfaces et types avec composition",
+    "Implémenter des type guards robustes", 
+    "Créer des fonctions génériques réutilisables",
+    "Appliquer les utility types avancés",
+    "Migrer du JavaScript vers TypeScript strict"
+  ],
+  "commonPitfalls": [
+    "Abus de any pour éviter les erreurs",
+    "@ts-ignore sans justification",
+    "Interfaces vs types mal choisis",
+    "Type guards incomplets",
+    "Génériques sans contraintes appropriées",
+    "Migration brutale sans étapes"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "base": {
+    "description": "All tests pass",
+    "criteria": "testsPass === true"
+  },
+  "bonus": {
+    "description": "Completed without using hints",
+    "criteria": "hintsUsed === 0"
+  },
+  "challenge": {
+    "description": "Completed in under 3 minutes",
+    "criteria": "timeSpent < 3"
+  }
+}

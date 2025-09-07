@@ -1,0 +1,28 @@
+{
+  "studentId": "charlie-debutant",
+  "studentName": "Charlie",
+  "currentScene": "N02-immutability",
+  "scenes": {
+    "N00-warmup": {
+      "status": "base",
+      "completedAt": "2025-09-06T12:54:07.327Z",
+      "timeSpent": 7,
+      "testsPass": true,
+      "hintsUsed": 3
+    },
+    "N01-variables": {
+      "status": "base",
+      "completedAt": "2025-09-06T14:54:07.327Z",
+      "timeSpent": 14,
+      "testsPass": true,
+      "hintsUsed": 2
+    }
+  },
+  "totalScore": 150,
+  "hintsUsed": {
+    "N00-warmup": 3,
+    "N01-variables": 2
+  },
+  "startedAt": "2025-09-06T12:54:07.327Z",
+  "lastUpdated": "2025-09-07T11:54:07.328Z"
+}

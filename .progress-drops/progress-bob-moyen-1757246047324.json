@@ -1,0 +1,46 @@
+{
+  "studentId": "bob-moyen",
+  "studentName": "Bob",
+  "currentScene": "N05-modules",
+  "scenes": {
+    "N00-warmup": {
+      "status": "bonus",
+      "completedAt": "2025-09-07T09:54:07.324Z",
+      "timeSpent": 5,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N01-variables": {
+      "status": "bonus",
+      "completedAt": "2025-09-07T11:54:07.324Z",
+      "timeSpent": 10,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N02-immutability": {
+      "status": "bonus",
+      "completedAt": "2025-09-07T13:54:07.324Z",
+      "timeSpent": 15,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N03-destructuring": {
+      "status": "base",
+      "completedAt": "2025-09-07T15:54:07.324Z",
+      "timeSpent": 12,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N04-collections": {
+      "status": "base",
+      "completedAt": "2025-09-07T17:54:07.324Z",
+      "timeSpent": 20,
+      "testsPass": true,
+      "hintsUsed": 0
+    }
+  },
+  "totalScore": 650,
+  "hintsUsed": {},
+  "startedAt": "2025-09-07T09:54:07.324Z",
+  "lastUpdated": "2025-09-07T11:54:07.324Z"
+}

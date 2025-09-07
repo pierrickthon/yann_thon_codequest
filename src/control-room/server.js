@@ -40,6 +40,8 @@ class ControlRoomServer {
     // Static files
     if (pathname === '/') {
       this.serveFile('index.html', res);
+    } else if (pathname === '/roadmap') {
+      this.serveFile('roadmap.html', res);
     } else {
       this.serveFile(pathname.substring(1), res);
     }

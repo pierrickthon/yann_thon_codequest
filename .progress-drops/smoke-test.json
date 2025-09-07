@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-07T16:54:49.287Z",
+  "classroom_id": "SMOKE_TEST_J1_2024",
+  "instructor": "smoke_test_instructor",
+  "students": [
+    {
+      "id": "student_001",
+      "name": "Test Alice",
+      "currentScene": "N01-pure-functions",
+      "scenes": {
+        "N00-warmup-tutorial": {
+          "status": "completed",
+          "score": 85,
+          "attempts": 1,
+          "duration": 12,
+          "completedAt": "2025-09-07T15:54:49.287Z"
+        },
+        "N01-pure-functions": {
+          "status": "bonus",
+          "score": 92,
+          "attempts": 2,
+          "duration": 18,
+          "completedAt": "2025-09-07T16:24:49.287Z"
+        }
+      },
+      "totalScore": 177,
+      "lastActivity": "2025-09-07T16:49:49.287Z"
+    },
+    {
+      "id": "student_002",
+      "name": "Test Bob",
+      "currentScene": "N00-warmup-tutorial",
+      "scenes": {
+        "N00-warmup-tutorial": {
+          "status": "base",
+          "score": 75,
+          "attempts": 3,
+          "duration": 25,
+          "completedAt": "2025-09-07T16:39:49.287Z"
+        }
+      },
+      "totalScore": 75,
+      "lastActivity": "2025-09-07T16:44:49.287Z"
+    }
+  ],
+  "metadata": {
+    "totalStudents": 2,
+    "averageProgress": 1.5,
+    "completionRate": 0.75
+  }
+}

@@ -1,0 +1,225 @@
+[
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N00-warmup",
+    "scenes": {},
+    "totalScore": 0
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N01-variables",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 150
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N02-immutability",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 300
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N03-destructuring",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N02-immutability": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.341Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 450
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N04-collections",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N02-immutability": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N03-destructuring": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 600
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N05-modules",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N02-immutability": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N03-destructuring": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N04-collections": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 750
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "N06-boss",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N02-immutability": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N03-destructuring": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N04-collections": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N05-modules": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 900
+  },
+  {
+    "studentId": "demo-loop",
+    "currentScene": "completed",
+    "scenes": {
+      "N00-warmup": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N01-variables": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N02-immutability": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N03-destructuring": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N04-collections": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N05-modules": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      },
+      "N06-boss": {
+        "status": "bonus",
+        "completedAt": "2025-09-07T11:54:07.342Z",
+        "timeSpent": 10,
+        "testsPass": true
+      }
+    },
+    "totalScore": 1050
+  }
+]

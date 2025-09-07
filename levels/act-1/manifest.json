@@ -1,0 +1,64 @@
+{
+  "id": "act-1",
+  "title": "Fondations JS moderne", 
+  "version": "2.3.0",
+  "description": "Maîtriser les fondamentaux JavaScript : fonctions pures, destructuring, méthodes tableau, closures et composition",
+  "estimatedDuration": "120min",
+  "difficulty": "beginner-intermediate",
+  "prerequisites": ["basic-js-syntax", "node-environment"],
+  "objectives": [
+    "Écrire des fonctions pures sans effets de bord",
+    "Maîtriser destructuring, rest/spread operators", 
+    "Utiliser map/filter/reduce pour transformer les données",
+    "Implémenter closures et modules propres",
+    "Intégrer tous les concepts dans un projet cohérent"
+  ],
+  "scenes": {
+    "core": [
+      "N00-warmup-tutorial",
+      "N01-pure-functions", 
+      "N02-destructuring",
+      "N03-map-filter",
+      "N04-reduce-immutability",
+      "N05-closures-modules",
+      "N06-boss-integration"
+    ]
+  },
+  "progression": {
+    "linear": true,
+    "unlockMode": "sequential",
+    "passingScore": "base"
+  },
+  "blueprint": {
+    "pedagogicalFlow": [
+      "N00: Validation environnement + flow CLI",
+      "N01: Fonctions pures, pas d'effets de bord", 
+      "N02: Syntaxe moderne ES6+, immutabilité",
+      "N03: Pipeline données avec map/filter",
+      "N04: Agrégations complexes avec reduce",
+      "N05: Encapsulation avec closures/modules",
+      "N06: Intégration finale, projet complet"
+    ],
+    "commonPitfalls": [
+      "Mutations involontaires d'objets/arrays",
+      "Effets de bord cachés dans les fonctions",
+      "Confusion this/context dans callbacks",
+      "Complexité excessive avec reduce",
+      "Variables globales dans les closures"
+    ],
+    "keySkills": [
+      "functional-programming",
+      "immutability",
+      "es6-syntax", 
+      "array-methods",
+      "module-pattern",
+      "data-transformation"
+    ]
+  },
+  "metadata": {
+    "created": "2024-01-01",
+    "author": "CodeQuest Pedagogical Team",
+    "tags": ["fundamentals", "functional", "es6", "immutable"],
+    "language": "javascript"
+  }
+}

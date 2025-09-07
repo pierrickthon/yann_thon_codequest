@@ -1,0 +1,66 @@
+{
+  "id": "act-2",
+  "title": "Structures & Async",
+  "version": "2.3.0", 
+  "description": "Maîtriser l'asynchronisme JavaScript : Promises, async/await, concurrence, gestion d'erreurs et orchestration",
+  "estimatedDuration": "150min",
+  "difficulty": "intermediate",
+  "prerequisites": ["act-1-completed", "promises-basic-concept", "callback-hell-understanding"],
+  "objectives": [
+    "Maîtriser Promises et conversion callback → Promise",
+    "Utiliser async/await pour contrôle de flux propre", 
+    "Implémenter concurrence limitée et file d'attente",
+    "Gérer retry, timeout et backoff exponentiel",
+    "Implémenter annulation propre (AbortController style)",
+    "Orchestrer APIs avec gestion d'erreurs et mode dégradé"
+  ],
+  "scenes": {
+    "core": [
+      "N07-promises-basics",
+      "N08-async-await-control",
+      "N09-concurrency-limit", 
+      "N10-retry-timeout-backoff",
+      "N11-cancellation-api",
+      "N12-boss-orchestration"
+    ]
+  },
+  "progression": {
+    "linear": true,
+    "unlockMode": "sequential",
+    "passingScore": "base",
+    "fastTrackAvailable": true
+  },
+  "blueprint": {
+    "pedagogicalFlow": [
+      "N07: Fondamentaux Promises, conversion callback",
+      "N08: async/await, contrôle de flux avancé",
+      "N09: Concurrence limitée, ordre préservé", 
+      "N10: Robustesse : retry, timeout, backoff",
+      "N11: Annulation propre, nettoyage ressources",
+      "N12: Orchestration APIs, mode graceful degradation"
+    ],
+    "commonPitfalls": [
+      "Oublier le .catch() dans les chaînes Promise",
+      "Race conditions avec concurrence limitée",
+      "Fuites de timers dans l'annulation",
+      "Backoff exponentiel mal implémenté",
+      "Gestion d'erreurs incomplète en mode dégradé",
+      "Mutations dans les orchestrations complexes"
+    ],
+    "keySkills": [
+      "promise-patterns",
+      "async-await-mastery", 
+      "concurrency-control",
+      "error-handling",
+      "resource-cleanup",
+      "api-orchestration"
+    ],
+    "mockingStrategy": "mock-async.js module provides offline simulation of network delays, failures, rate limits"
+  },
+  "metadata": {
+    "created": "2024-01-01",
+    "author": "CodeQuest Advanced Team", 
+    "tags": ["async", "promises", "concurrency", "orchestration"],
+    "language": "javascript"
+  }
+}

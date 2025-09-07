@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeQuest Control Room v1 - Instructor View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="control-header">
+        <h1>🎮 CodeQuest Control Room v1</h1>
+        <p>Instructor Dashboard - Monitor Student Progress</p>
+    </div>
+
+    <div class="control-panel">
+        <!-- File Selector -->
+        <div class="section">
+            <h2>📁 Load Student Snapshots</h2>
+            <div class="file-controls">
+                <input type="file" id="fileInput" multiple accept=".json" />
+                <button class="btn btn-primary" onclick="loadSnapshots()">Load Snapshots</button>
+                <button class="btn btn-secondary" onclick="loadDemoData()">Load Demo Data</button>
+                <button class="btn btn-secondary" onclick="reloadSnapshots()">🔄 Reload</button>
+            </div>
+            <div id="loaded-files" class="loaded-files"></div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="section">
+            <h2>📊 Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-students">0</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avg-progress">0%</div>
+                    <div class="stat-label">Avg Progress</div>
+                </div>
+                <div class="stat-card alert">
+                    <div class="stat-value" id="stuck-count">0</div>
+                    <div class="stat-label">Stuck (>45min)</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-value" id="slow-count">0</div>
+                    <div class="stat-label">Slow (>30min)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Matrix -->
+        <div class="section">
+            <h2>📈 Student Progress Matrix</h2>
+            <div class="matrix-container">
+                <table class="progress-matrix" id="progressMatrix">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>N00</th>
+                            <th>N01</th>
+                            <th>N02</th>
+                            <th>N03</th>
+                            <th>N04</th>
+                            <th>N05</th>
+                            <th>N06</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody">
+                        <tr>
+                            <td colspan="9" class="empty-state">No data loaded. Use file selector above.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Heatmap -->
+        <div class="section">
+            <h2>🔥 Difficulty Heatmap</h2>
+            <div class="heatmap-container" id="heatmapContainer">
+                <div class="heatmap-grid" id="heatmapGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                <div class="heatmap-legend">
+                    <span class="legend-item easy">Easy (0-15%)</span>
+                    <span class="legend-item medium">Medium (15-30%)</span>
+                    <span class="legend-item hard">Hard (30-50%)</span>
+                    <span class="legend-item very-hard">Very Hard (>50%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="section">
+            <h2>🚨 Alerts</h2>
+            <div class="alerts-container" id="alertsContainer">
+                <div class="empty-state">No alerts at this time.</div>
+            </div>
+        </div>
+
+        <!-- Plan B Emergency Panel -->
+        <div class="section plan-b-section">
+            <h2>🆘 Plan B - Emergency Controls</h2>
+            <div class="plan-b-panel">
+                
+                <!-- Thresholds Config -->
+                <div class="threshold-config">
+                    <h3>⏱️ Alert Thresholds</h3>
+                    <div class="slider-group">
+                        <div class="slider-item">
+                            <label for="slowThreshold">Slow Threshold (min):</label>
+                            <input type="range" id="slowThreshold" min="15" max="60" value="30" 
+                                   oninput="updateThreshold('slow', this.value)">
+                            <span class="slider-value" id="slowValue">30</span>
+                        </div>
+                        <div class="slider-item">
+                            <label for="stuckThreshold">Stuck Threshold (min):</label>
+                            <input type="range" id="stuckThreshold" min="30" max="120" value="45"
+                                   oninput="updateThreshold('stuck', this.value)">
+                            <span class="slider-value" id="stuckValue">45</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Toggles -->
+                <div class="emergency-toggles">
+                    <h3>🔓 Emergency Unlocks</h3>
+                    <div class="toggle-grid">
+                        <div class="toggle-item">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="unlockAllHints" onchange="toggleEmergencyMode('hints', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span>Unlock All Hints</span>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="markOptional" onchange="toggleEmergencyMode('optional', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span>Mark N08-N10 Optional</span>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="lowerPass" onchange="toggleEmergencyMode('lowerpass', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span>Lower Boss Pass to 3/5 tests</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Actions -->
+                <div class="emergency-actions">
+                    <h3>⚡ Emergency Actions</h3>
+                    <div class="actions-grid">
+                        <button class="btn btn-emergency" onclick="generateClassSnapshots()">
+                            📸 Generate Class Snapshots
+                        </button>
+                        <button class="btn btn-warning" onclick="toggleProjectorMode()">
+                            📺 Projector Mode
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportEnrichedCSV()">
+                            📊 Export Enriched CSV
+                        </button>
+                        <button class="btn btn-secondary" onclick="showTeamFilter()">
+                            👥 Team & Act Filter
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="section">
+            <h2>🔧 Standard Actions</h2>
+            <div class="actions-grid">
+                <button class="btn btn-primary" onclick="exportCSV()">📤 Export CSV</button>
+                <button class="btn btn-secondary" onclick="filterByTeam()">👥 Filter by Team</button>
+                <button class="btn btn-secondary" onclick="refreshView()">🔄 Refresh View</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

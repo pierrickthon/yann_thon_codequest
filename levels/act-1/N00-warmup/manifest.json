@@ -1,0 +1,19 @@
+{
+  "sceneId": "N00",
+  "title": "System Check & Warm-up",
+  "description": "Verify your environment and run your first test",
+  "learningObjectives": [
+    "Verify Node.js installation",
+    "Understand CodeQuest workflow",
+    "Run your first test successfully"
+  ],
+  "estimatedMinutes": 10,
+  "difficulty": "beginner",
+  "tags": ["setup", "environment", "basics"],
+  "files": {
+    "solution": "starter/warmup.js",
+    "test": "tests.spec.js",
+    "readme": "README.md",
+    "hints": "hints/"
+  }
+}

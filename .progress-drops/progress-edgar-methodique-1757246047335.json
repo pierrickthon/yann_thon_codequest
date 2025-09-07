@@ -1,0 +1,41 @@
+{
+  "studentId": "edgar-methodique",
+  "studentName": "Edgar",
+  "currentScene": "N04-collections",
+  "scenes": {
+    "N00-warmup": {
+      "status": "base",
+      "completedAt": "2025-09-05T14:54:07.335Z",
+      "timeSpent": 6,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N01-variables": {
+      "status": "base",
+      "completedAt": "2025-09-05T16:54:07.335Z",
+      "timeSpent": 11,
+      "testsPass": true,
+      "hintsUsed": 0
+    },
+    "N02-immutability": {
+      "status": "base",
+      "completedAt": "2025-09-05T18:54:07.335Z",
+      "timeSpent": 17,
+      "testsPass": true,
+      "hintsUsed": 1
+    },
+    "N03-destructuring": {
+      "status": "base",
+      "completedAt": "2025-09-05T20:54:07.335Z",
+      "timeSpent": 13,
+      "testsPass": true,
+      "hintsUsed": 0
+    }
+  },
+  "totalScore": 390,
+  "hintsUsed": {
+    "N02-immutability": 1
+  },
+  "startedAt": "2025-09-05T14:54:07.335Z",
+  "lastUpdated": "2025-09-07T11:54:07.335Z"
+}

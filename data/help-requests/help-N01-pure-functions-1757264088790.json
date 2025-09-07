@@ -1,0 +1,10 @@
+{
+  "timestamp": "2025-09-07T16:54:48.371Z",
+  "sceneId": "N01-pure-functions",
+  "environment": {
+    "node": "v18.19.1",
+    "platform": "linux",
+    "cwd": "/mnt/d/workspace/efrei/codeQUESTws"
+  },
+  "gitStatus": "M package-lock.json\n M package.json\n M src/cli/index.js\n M src/control-room/public/index.html\n M src/control-room/server.js\n?? .progress-drops/\n?? .scene\n?? ACCEPTANCE-CHECKLIST.md\n?? ACT1_VALIDATION_REPORT.md\n?? CREATE_ACT1_SCENES.sh\n?? HOWTO.md\n?? control-room/\n?? currentControlRoom.png\n?? data/\n?? dist/\n?? docs/HOWTO-v2.md\n?? docs/TROUBLESHOOTING.md\n?? docs/implementation-report-v2.3.0.md\n?? docs/ts-migration-guide.md\n?? gameRoadmapLevel.png\n?? levels/\n?? materials/\n?? missions/\n?? node_modules/\n?? runbooks/\n?? scripts/\n?? src/cli/cli-v2.js\n?? src/cli/fast-track.js\n?? src/cli/typescript.js\n?? src/control-room/public/roadmap.css\n?? src/control-room/public/roadmap.html\n?? src/control-room/public/roadmap.js\n?? src/static-server.js\n?? student-workspace/\n?? test-workspace/\n?? ts/\n?? tsconfig.json"
+}

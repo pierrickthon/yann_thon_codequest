@@ -1,0 +1,43 @@
+{
+  "id": "N13",
+  "title": "Types & Inférence",
+  "description": "Maîtriser l'inférence TypeScript et éviter les pièges any/unknown",
+  "estimatedTime": 15,
+  "difficulty": 2,
+  "concepts": [
+    "Type inference",
+    "Primitive types", 
+    "Function typing",
+    "Unknown vs any",
+    "Type assertions"
+  ],
+  "learningObjectives": [
+    "Comprendre l'inférence automatique de types",
+    "Différencier any, unknown et types spécifiques",
+    "Typer des fonctions avec paramètres et retour",
+    "Utiliser les assertions de type sécurisées"
+  ],
+  "trophyCondition": "Zéro any explicite et zéro @ts-ignore",
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  },
+  "hints": [
+    "H1.md",
+    "H2.md", 
+    "H3.md"
+  ],
+  "validation": {
+    "typescript": {
+      "strict": true,
+      "noImplicitAny": true,
+      "allowAny": false,
+      "allowTsIgnore": false
+    },
+    "tests": {
+      "required": true,
+      "coverage": 90
+    }
+  }
+}

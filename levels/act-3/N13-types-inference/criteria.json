@@ -1,0 +1,17 @@
+{
+  "base": {
+    "tests_pass": true,
+    "no_syntax_errors": true,
+    "typescript_compiles": true
+  },
+  "bonus": {
+    "zero_any_usage": true,
+    "zero_ts_ignore": true,
+    "type_guards_used": true
+  },
+  "challenge": {
+    "type_score_95_plus": true,
+    "inference_mastery": true,
+    "elegant_types": true
+  }
+}
