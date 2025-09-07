@@ -1,0 +1,142 @@
+<!-- CodeQuest Roadmap Track Template -->
+<svg id="roadmap-track-template" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for background -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#98fb98;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8fbc8f;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Cloud pattern -->
+    <pattern id="clouds" patternUnits="userSpaceOnUse" width="120" height="80">
+      <ellipse cx="30" cy="40" rx="25" ry="15" fill="white" opacity="0.4"/>
+      <ellipse cx="90" cy="35" rx="20" ry="12" fill="white" opacity="0.3"/>
+      <ellipse cx="15" cy="25" rx="15" ry="8" fill="white" opacity="0.3"/>
+    </pattern>
+    
+    <!-- Tree gradient -->
+    <radialGradient id="treeGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#32cd32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228b22;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Track shadow filter -->
+    <filter id="trackShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+    
+    <!-- Node glow filter -->
+    <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="600" fill="url(#skyGradient)"/>
+  
+  <!-- Clouds -->
+  <rect x="0" y="0" width="1200" height="400" fill="url(#clouds)"/>
+  
+  <!-- Decorative elements -->
+  <g class="decorations" opacity="0.8">
+    <!-- Trees -->
+    <ellipse cx="120" cy="480" rx="30" ry="45" fill="url(#treeGradient)"/>
+    <rect x="115" y="505" width="10" height="40" fill="#8b4513"/>
+    
+    <ellipse cx="320" cy="450" rx="35" ry="50" fill="url(#treeGradient)"/>
+    <rect x="315" y="480" width="10" height="45" fill="#8b4513"/>
+    
+    <ellipse cx="580" cy="470" rx="28" ry="40" fill="url(#treeGradient)"/>
+    <rect x="575" y="495" width="10" height="35" fill="#8b4513"/>
+    
+    <ellipse cx="880" cy="460" rx="32" ry="48" fill="url(#treeGradient)"/>
+    <rect x="875" y="490" width="10" height="42" fill="#8b4513"/>
+    
+    <ellipse cx="1080" cy="475" rx="30" ry="45" fill="url(#treeGradient)"/>
+    <rect x="1075" y="500" width="10" height="38" fill="#8b4513"/>
+    
+    <!-- Mountains in background -->
+    <polygon points="0,400 150,250 300,400" fill="#9370db" opacity="0.3"/>
+    <polygon points="200,400 400,180 600,400" fill="#9370db" opacity="0.25"/>
+    <polygon points="500,400 750,200 1000,400" fill="#9370db" opacity="0.3"/>
+    <polygon points="900,400 1100,220 1200,400" fill="#9370db" opacity="0.25"/>
+    
+    <!-- Grass patches -->
+    <ellipse cx="200" cy="520" rx="40" ry="15" fill="#90ee90" opacity="0.6"/>
+    <ellipse cx="450" cy="540" rx="35" ry="12" fill="#90ee90" opacity="0.6"/>
+    <ellipse cx="750" cy="530" rx="45" ry="18" fill="#90ee90" opacity="0.6"/>
+    <ellipse cx="1000" cy="545" rx="38" ry="14" fill="#90ee90" opacity="0.6"/>
+  </g>
+  
+  <!-- Main winding track path -->
+  <path id="track" 
+        d="M 100 420
+           Q 200 450, 280 400
+           Q 380 340, 480 370
+           Q 580 400, 680 350
+           Q 780 300, 880 330
+           Q 980 360, 1080 310
+           Q 1140 280, 1100 340"
+        stroke="none" 
+        fill="none"
+        filter="url(#trackShadow)"/>
+        
+  <!-- Node position markers (invisible, used for positioning) -->
+  <g id="node-positions">
+    <!-- N00 -->
+    <circle id="pos-0" cx="100" cy="420" r="2" opacity="0"/>
+    <!-- N01 -->
+    <circle id="pos-1" cx="280" cy="400" r="2" opacity="0"/>
+    <!-- N02 -->
+    <circle id="pos-2" cx="480" cy="370" r="2" opacity="0"/>
+    <!-- N03 -->
+    <circle id="pos-3" cx="680" cy="350" r="2" opacity="0"/>
+    <!-- N04 -->
+    <circle id="pos-4" cx="880" cy="330" r="2" opacity="0"/>
+    <!-- N05 -->
+    <circle id="pos-5" cx="1080" cy="310" r="2" opacity="0"/>
+    <!-- N06 -->
+    <circle id="pos-6" cx="1100" cy="340" r="2" opacity="0"/>
+  </g>
+  
+  <!-- Decorative elements near path -->
+  <g class="path-decorations" opacity="0.6">
+    <!-- Small flowers/details along the path -->
+    <circle cx="150" cy="435" r="3" fill="#ff69b4"/>
+    <circle cx="155" cy="430" r="2" fill="#ffc0cb"/>
+    
+    <circle cx="350" cy="365" r="3" fill="#ff69b4"/>
+    <circle cx="345" cy="370" r="2" fill="#ffc0cb"/>
+    
+    <circle cx="550" cy="385" r="3" fill="#ff69b4"/>
+    <circle cx="545" cy="380" r="2" fill="#ffc0cb"/>
+    
+    <circle cx="750" cy="325" r="3" fill="#ff69b4"/>
+    <circle cx="755" cy="330" r="2" fill="#ffc0cb"/>
+    
+    <circle cx="950" cy="345" r="3" fill="#ff69b4"/>
+    <circle cx="955" cy="350" r="2" fill="#ffc0cb"/>
+    
+    <!-- Small rocks -->
+    <ellipse cx="220" cy="425" rx="4" ry="3" fill="#696969"/>
+    <ellipse cx="420" cy="390" rx="5" ry="4" fill="#696969"/>
+    <ellipse cx="620" cy="365" rx="4" ry="3" fill="#696969"/>
+    <ellipse cx="820" cy="345" rx="5" ry="4" fill="#696969"/>
+  </g>
+  
+  <!-- Sun in the corner -->
+  <g class="sun" transform="translate(1050, 80)">
+    <circle cx="0" cy="0" r="35" fill="#ffd700" opacity="0.8"/>
+    <g stroke="#ffd700" stroke-width="3" opacity="0.6">
+      <line x1="-50" y1="0" x2="-40" y2="0"/>
+      <line x1="40" y1="0" x2="50" y2="0"/>
+      <line x1="0" y1="-50" x2="0" y2="-40"/>
+      <line x1="0" y1="40" x2="0" y2="50"/>
+      <line x1="-35" y1="-35" x2="-28" y2="-28"/>
+      <line x1="28" y1="28" x2="35" y2="35"/>
+      <line x1="35" y1="-35" x2="28" y2="-28"/>
+      <line x1="-28" y1="28" x2="-35" y2="35"/>
+    </g>
+  </g>
+</svg>

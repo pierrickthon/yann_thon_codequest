@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeQuest - Learning Roadmap</title>
     <link rel="stylesheet" href="roadmap.css">
+    <link rel="stylesheet" href="assets/roadmap-map.css">
 </head>
 <body>
     <div class="game-container">
@@ -44,8 +45,18 @@
             </div>
         </header>
 
-        <!-- Game Map -->
-        <div class="roadmap-container">
+        <!-- Game Map Container -->
+        <div id="roadmap-map-container" class="roadmap-container">
+            <!-- Enhanced game-like map will be dynamically loaded here -->
+            <div class="loading-placeholder" style="text-align: center; padding: 60px; color: #7f8c8d;">
+                <div style="font-size: 48px; margin-bottom: 20px;">🎮</div>
+                <h3>Loading Interactive Map...</h3>
+                <p>Preparing your learning adventure</p>
+            </div>
+        </div>
+
+        <!-- Fallback: Original Static Map (hidden by default) -->
+        <div id="static-roadmap-fallback" class="roadmap-container" style="display: none;">
             <svg class="roadmap-path" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
                 <!-- Background elements -->
                 <defs>
@@ -234,6 +245,40 @@
         </div>
     </div>
 
+    <script src="js/roadmap-map.js"></script>
     <script src="roadmap.js"></script>
+    <script>
+        // Initialize the enhanced game-like roadmap
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Initialize the new game-like roadmap map
+                const roadmapMap = new RoadmapMap('roadmap-map-container', {
+                    enableAnimations: !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+                    enableTooltips: true,
+                    enableConfetti: true
+                });
+                
+                // Handle node clicks and integrate with existing roadmap.js functionality
+                document.getElementById('roadmap-map-container').addEventListener('nodeClick', function(event) {
+                    const { sceneId, nodeState } = event.detail;
+                    
+                    // Trigger existing roadmap.js functions if available
+                    if (typeof window.navigateToScene === 'function') {
+                        window.navigateToScene(sceneId);
+                    } else {
+                        // Fallback navigation
+                        console.log(`Navigate to scene: ${sceneId} (${nodeState})`);
+                        // Could integrate with CLI navigation here
+                    }
+                });
+                
+            } catch (error) {
+                console.warn('Failed to initialize enhanced roadmap map, showing fallback:', error);
+                // Show fallback static map
+                document.getElementById('roadmap-map-container').style.display = 'none';
+                document.getElementById('static-roadmap-fallback').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>

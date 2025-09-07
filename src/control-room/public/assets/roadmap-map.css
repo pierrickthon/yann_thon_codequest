@@ -1,0 +1,447 @@
+/* CodeQuest Game-like Roadmap Map - Variables & Styles */
+
+:root {
+  /* Theme Colors */
+  --cq-bg-1: #6a5acd;
+  --cq-bg-2: #9a7dff;
+  --cq-node-completed: #35d07f;
+  --cq-node-current: #2d8cff;
+  --cq-node-locked: #c9cdd4;
+  --cq-track-completed: #33cc84;
+  --cq-track-pending: #d9dbe1;
+  --cq-glow: 0 6px 16px rgba(0,0,0,.15);
+  
+  /* UI Colors */
+  --cq-white: #ffffff;
+  --cq-dark: #2d3748;
+  --cq-gray-light: #f7fafc;
+  --cq-gray-medium: #e2e8f0;
+  --cq-success: #48bb78;
+  --cq-warning: #ed8936;
+  
+  /* Sizing */
+  --cq-node-size: 56px;
+  --cq-node-size-mobile: 48px;
+  --cq-track-width: 24px;
+  --cq-border-radius: 12px;
+  --cq-space-sm: 8px;
+  --cq-space-md: 16px;
+  --cq-space-lg: 24px;
+}
+
+/* Reset and Base */
+.roadmap-map * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Map Container */
+.roadmap-map {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--cq-bg-1) 0%, var(--cq-bg-2) 100%);
+  overflow: hidden;
+}
+
+/* SVG Map */
+.roadmap-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.roadmap-svg #track-background {
+  stroke: var(--cq-track-pending);
+  stroke-width: var(--cq-track-width);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.roadmap-svg #track-progress {
+  stroke: var(--cq-track-completed);
+  stroke-width: var(--cq-track-width);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Game Nodes */
+.game-nodes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.game-node {
+  position: absolute;
+  width: var(--cq-node-size);
+  height: var(--cq-node-size);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.game-node:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.game-node:focus {
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.game-node:focus .node-circle {
+  box-shadow: 0 0 0 3px rgba(45, 140, 255, 0.3);
+}
+
+/* Node Circle */
+.node-circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--cq-white);
+  box-shadow: var(--cq-glow);
+  transition: all 0.3s ease;
+}
+
+/* Node States */
+.game-node.completed .node-circle {
+  background: var(--cq-node-completed);
+  background: linear-gradient(135deg, var(--cq-node-completed) 0%, #2bbd6f 100%);
+}
+
+.game-node.current .node-circle {
+  background: var(--cq-node-current);
+  background: linear-gradient(135deg, var(--cq-node-current) 0%, #1e6bb8 100%);
+  position: relative;
+}
+
+.game-node.locked .node-circle {
+  background: var(--cq-node-locked);
+  color: #718096;
+  cursor: not-allowed;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+/* Current Node Pulse Animation */
+.game-node.current .node-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid var(--cq-node-current);
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Completed Node Check Icon */
+.game-node.completed .node-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  animation: checkmark-appear 0.5s ease 0.2s forwards;
+}
+
+.node-check svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--cq-white);
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Locked Node Icon */
+.game-node.locked .node-lock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.node-lock svg {
+  width: 100%;
+  height: 100%;
+  fill: #718096;
+}
+
+/* Trophy Icons */
+.node-trophy {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: #ffd700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transform: scale(0);
+  animation: trophy-appear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards;
+}
+
+@keyframes trophy-appear {
+  0% {
+    transform: scale(0) rotate(-180deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Node Tooltips */
+.node-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 12px;
+  background: var(--cq-white);
+  border-radius: var(--cq-border-radius);
+  padding: var(--cq-space-md);
+  box-shadow: var(--cq-glow);
+  max-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.node-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--cq-white);
+}
+
+.game-node:hover .node-tooltip,
+.game-node:focus .node-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.tooltip-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--cq-dark);
+  margin-bottom: var(--cq-space-sm);
+}
+
+.tooltip-description {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: var(--cq-space-md);
+  line-height: 1.4;
+}
+
+.tooltip-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.tooltip-time {
+  color: #718096;
+}
+
+.tooltip-criteria {
+  display: flex;
+  gap: 4px;
+}
+
+/* Confetti Animation */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.confetti.circle {
+  border-radius: 50%;
+}
+
+.confetti.square {
+  border-radius: 2px;
+}
+
+/* View Toggle */
+.view-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  background: var(--cq-white);
+  border: none;
+  border-radius: var(--cq-border-radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cq-dark);
+  box-shadow: var(--cq-glow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .game-node {
+    width: var(--cq-node-size-mobile);
+    height: var(--cq-node-size-mobile);
+  }
+  
+  .node-circle {
+    font-size: 16px;
+  }
+  
+  .node-tooltip {
+    max-width: 240px;
+    padding: var(--cq-space-sm);
+    font-size: 12px;
+  }
+  
+  .tooltip-title {
+    font-size: 14px;
+  }
+  
+  .tooltip-description {
+    font-size: 12px;
+  }
+  
+  .view-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+/* Touch Device Support */
+@media (pointer: coarse) {
+  .game-node {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .game-node:hover {
+    transform: translate(-50%, -50%);
+  }
+  
+  .game-node:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .node-pulse,
+  .confetti {
+    animation: none !important;
+  }
+  
+  .game-node,
+  .node-circle,
+  .node-tooltip,
+  .view-toggle {
+    transition: none !important;
+  }
+  
+  .node-check,
+  .node-trophy {
+    animation: none !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  
+  .node-trophy {
+    transform: scale(1) rotate(0deg) !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .game-node.completed .node-circle {
+    border: 2px solid #000;
+  }
+  
+  .game-node.current .node-circle {
+    border: 3px solid #fff;
+  }
+  
+  .game-node.locked .node-circle {
+    border: 2px solid #666;
+  }
+}

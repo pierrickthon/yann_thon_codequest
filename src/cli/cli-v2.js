@@ -81,8 +81,17 @@ class CodeQuestCLI {
     const targetPath = path.join(this.studentWorkspace, 'current', normalizedId);
     
     if (fs.existsSync(starterPath)) {
-      this.copyDir(starterPath, targetPath);
-      console.log(`✅ Starter code copied to student-workspace/current/${normalizedId}/`);
+      const targetStarterPath = path.join(targetPath, 'starter');
+      this.copyDir(starterPath, targetStarterPath);
+      console.log(`✅ Starter code copied to student-workspace/current/${normalizedId}/starter/`);
+    }
+
+    // Copy scene test file into student workspace so validation can run
+    const sceneTestPath = path.join(scenePath, 'tests.spec.js');
+    const targetTestPath = path.join(targetPath, 'tests.spec.js');
+    if (fs.existsSync(sceneTestPath)) {
+      fs.copyFileSync(sceneTestPath, targetTestPath);
+      console.log(`🧪 Tests copied: student-workspace/current/${normalizedId}/tests.spec.js`);
     }
 
     // Update progress.json
@@ -110,7 +119,7 @@ class CodeQuestCLI {
     }
 
     console.log(`\n📂 Work in: student-workspace/current/${normalizedId}/`);
-    console.log(`🧪 Test with: node student-workspace/current/${normalizedId}/test.js`);
+    console.log(`🧪 Test with: node student-workspace/current/${normalizedId}/tests.spec.js`);
     console.log(`✅ Validate with: cq validate ${sceneId}`);
   }
 
@@ -130,7 +139,7 @@ class CodeQuestCLI {
 
     const normalizedId = targetScene.includes('-') ? targetScene : `${targetScene}-scene`;
     const workPath = path.join(this.studentWorkspace, 'current', normalizedId);
-    const testPath = path.join(workPath, 'test.js');
+    const testPath = path.join(workPath, 'tests.spec.js');
     
     if (!fs.existsSync(testPath)) {
       console.error(`❌ Test file not found for scene ${targetScene}`);

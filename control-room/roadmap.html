@@ -3,527 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeQuest 2.3 - Learning Roadmap</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .how-to-play {
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .how-to-play .step {
-            display: flex;
-            align-items: center;
-            margin: 5px;
-        }
-
-        .how-to-play .step-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-
-        .how-to-play .arrow {
-            font-size: 1.5rem;
-            margin: 0 10px;
-            opacity: 0.7;
-        }
-
-        /* Progress Stats */
-        .stats-bar {
-            background: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .stat {
-            text-align: center;
-            padding: 10px;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-
-        /* Roadmap Container */
-        .roadmap-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Acts Grid */
-        .acts-grid {
-            display: grid;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .act {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .act-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .act-title {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-        .act-progress {
-            background: #ecf0f1;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .act-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #2ecc71, #27ae60);
-            transition: width 0.5s ease;
-        }
-
-        /* Levels Grid */
-        .levels-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .level {
-            position: relative;
-            background: #f8f9fa;
-            border: 3px solid #e9ecef;
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .level:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .level.completed {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border-color: #28a745;
-        }
-
-        .level.current {
-            background: linear-gradient(135deg, #cce5ff, #b8daff);
-            border-color: #004085;
-            animation: pulse 2s infinite;
-        }
-
-        .level.locked {
-            background: #e9ecef;
-            border-color: #adb5bd;
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .level-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #495057;
-            margin-bottom: 10px;
-        }
-
-        .level.completed .level-number {
-            color: #28a745;
-        }
-
-        .level.current .level-number {
-            color: #004085;
-        }
-
-        .level-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 5px;
-        }
-
-        .level-status {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        /* Level Panel Modal */
-        .level-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .level-panel.active {
-            display: flex;
-        }
-
-        .panel-content {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .panel-header {
-            margin-bottom: 20px;
-        }
-
-        .panel-title {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .panel-description {
-            color: #7f8c8d;
-        }
-
-        .panel-objectives {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .panel-objectives h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .panel-objectives ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .panel-objectives li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .panel-objectives li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-        }
-
-        .panel-actions {
-            display: grid;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-        }
-
-        .btn-secondary:hover {
-            background: #d5dbdd;
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Hints Counter */
-        .hints-counter {
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .hint-badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .hint-used {
-            background: #ffc107;
-            color: #856404;
-        }
-
-        .hint-available {
-            background: #e9ecef;
-            color: #6c757d;
-        }
-
-        /* Placeholders */
-        .placeholder {
-            text-align: center;
-            padding: 40px;
-            color: #6c757d;
-            font-style: italic;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6c757d;
-        }
-    </style>
+    <title>CodeQuest - Learning Roadmap</title>
+    <link rel="stylesheet" href="roadmap.css">
+    <link rel="stylesheet" href="assets/roadmap-map.css">
 </head>
 <body>
-    <div class="header">
-        <h1>🎮 CodeQuest 2.3 - Learning Roadmap</h1>
-        
-        <div class="how-to-play">
-            <div class="step">
-                <span class="step-icon">🌿</span>
-                <span>git branch</span>
-            </div>
-            <span class="arrow">→</span>
-            <div class="step">
-                <span class="step-icon">💻</span>
-                <span>code</span>
-            </div>
-            <span class="arrow">→</span>
-            <div class="step">
-                <span class="step-icon">🧪</span>
-                <span>test</span>
-            </div>
-            <span class="arrow">→</span>
-            <div class="step">
-                <span class="step-icon">✅</span>
-                <span>validate</span>
-            </div>
-            <span class="arrow">→</span>
-            <div class="step">
-                <span class="step-icon">📦</span>
-                <span>commit</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="roadmap-container">
-        <div class="stats-bar">
-            <div class="stat">
-                <div class="stat-value" id="total-progress">0%</div>
-                <div class="stat-label">Overall Progress</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="scenes-completed">0/7</div>
-                <div class="stat-label">Scenes Completed</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="current-scene">-</div>
-                <div class="stat-label">Current Scene</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="total-time">0h</div>
-                <div class="stat-label">Time Spent</div>
-            </div>
-        </div>
-
-        <div class="acts-grid">
-            <!-- Act I -->
-            <div class="act" id="act-1">
-                <div class="act-header">
-                    <div>
-                        <div class="act-title">Act I: JavaScript Fundamentals</div>
-                        <div>Master the foundations with TDD methodology</div>
+    <div class="game-container">
+        <!-- Header with player stats -->
+        <header class="game-header">
+            <div class="player-info">
+                <div class="avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%234299e1'/%3E%3Ctext x='20' y='25' font-family='Arial' font-size='16' fill='white' text-anchor='middle'%3E🎓%3C/text%3E%3C/svg%3E" alt="Player">
+                    <span class="level-badge" id="player-level">Lv.1</span>
+                </div>
+                <div class="player-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="total-score">0</span>
                     </div>
-                    <div style="min-width: 200px;">
-                        <div class="act-progress">
-                            <div class="act-progress-fill" id="act1-progress" style="width: 0%"></div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🏆</span>
+                        <span class="stat-value" id="completion-rate">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="streak-count">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="act-title">
+                <h1>🎮 Act I: JavaScript Fundamentals</h1>
+                <p>Master the foundations while learning TDD methodology</p>
+            </div>
+            
+            <div class="progress-overview">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0/7 Scenes Complete</span>
+            </div>
+        </header>
+
+        <!-- Game Map Container -->
+        <div id="roadmap-map-container" class="roadmap-container">
+            <!-- Enhanced game-like map will be dynamically loaded here -->
+            <div class="loading-placeholder" style="text-align: center; padding: 60px; color: #7f8c8d;">
+                <div style="font-size: 48px; margin-bottom: 20px;">🎮</div>
+                <h3>Loading Interactive Map...</h3>
+                <p>Preparing your learning adventure</p>
+            </div>
+        </div>
+
+        <!-- Fallback: Original Static Map (hidden by default) -->
+        <div id="static-roadmap-fallback" class="roadmap-container" style="display: none;">
+            <svg class="roadmap-path" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+                <!-- Background elements -->
+                <defs>
+                    <radialGradient id="grassGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#7ed321;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#4a9b2e;stop-opacity:0.8" />
+                    </radialGradient>
+                    <pattern id="clouds" patternUnits="userSpaceOnUse" width="100" height="60">
+                        <ellipse cx="25" cy="30" rx="20" ry="12" fill="white" opacity="0.3"/>
+                        <ellipse cx="75" cy="30" rx="15" ry="10" fill="white" opacity="0.2"/>
+                    </pattern>
+                </defs>
+                
+                <!-- Sky and ground -->
+                <rect x="0" y="0" width="1200" height="300" fill="#87ceeb"/>
+                <rect x="0" y="300" width="1200" height="300" fill="url(#grassGradient)"/>
+                <rect x="0" y="0" width="1200" height="600" fill="url(#clouds)"/>
+                
+                <!-- Trees and decorations -->
+                <g class="decorations">
+                    <!-- Trees -->
+                    <ellipse cx="100" cy="380" rx="25" ry="40" fill="#228b22"/>
+                    <rect x="95" y="400" width="10" height="30" fill="#8b4513"/>
+                    
+                    <ellipse cx="300" cy="360" rx="30" ry="45" fill="#32cd32"/>
+                    <rect x="295" y="385" width="10" height="35" fill="#8b4513"/>
+                    
+                    <ellipse cx="900" cy="370" rx="35" ry="50" fill="#228b22"/>
+                    <rect x="895" y="400" width="10" height="40" fill="#8b4513"/>
+                    
+                    <ellipse cx="1100" cy="365" rx="28" ry="42" fill="#32cd32"/>
+                    <rect x="1095" y="390" width="10" height="32" fill="#8b4513"/>
+                </g>
+                
+                <!-- Winding Path -->
+                <path d="M 80 400 
+                         Q 200 420, 250 380
+                         Q 350 320, 450 350
+                         Q 550 380, 650 320
+                         Q 750 260, 850 300
+                         Q 950 340, 1050 280
+                         Q 1120 250, 1150 300" 
+                      stroke="#deb887" 
+                      stroke-width="25" 
+                      fill="none"
+                      stroke-linecap="round"/>
+                
+                <!-- Path outline -->
+                <path d="M 80 400 
+                         Q 200 420, 250 380
+                         Q 350 320, 450 350
+                         Q 550 380, 650 320
+                         Q 750 260, 850 300
+                         Q 950 340, 1050 280
+                         Q 1120 250, 1150 300" 
+                      stroke="#cd853f" 
+                      stroke-width="3" 
+                      fill="none"
+                      stroke-linecap="round"/>
+            </svg>
+
+            <!-- Scene Levels positioned on the path -->
+            <div class="scene-levels">
+                <!-- N00: JavaScript Fundamentals -->
+                <div class="scene-level completed" data-scene="N00-intro" style="left: 80px; top: 360px;">
+                    <div class="level-circle">
+                        <span class="level-number">01</span>
+                        <div class="completion-ring"></div>
+                    </div>
+                    <div class="level-info">
+                        <h3>JavaScript Fundamentals</h3>
+                        <p>Variables, functions, control flow</p>
+                        <div class="level-stats">
+                            <span class="status-badge bonus">BONUS</span>
+                            <span class="attempts">1 attempt</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="levels-grid" id="act1-levels">
-                    <!-- Levels will be generated by JavaScript -->
-                </div>
-            </div>
 
-            <!-- Act II-IV Placeholders -->
-            <div class="act" style="opacity: 0.5;">
-                <div class="act-header">
-                    <div class="act-title">🔒 Act II: Advanced Patterns (Coming Soon)</div>
+                <!-- N01: Functions & Scope -->
+                <div class="scene-level completed" data-scene="N01-functions" style="left: 230px; top: 340px;">
+                    <div class="level-circle">
+                        <span class="level-number">02</span>
+                        <div class="completion-ring"></div>
+                    </div>
+                    <div class="level-info">
+                        <h3>Functions & Scope</h3>
+                        <p>Closures, higher-order functions</p>
+                        <div class="level-stats">
+                            <span class="status-badge bonus">BONUS</span>
+                            <span class="attempts">1 attempt</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="placeholder">
-                    Complete Act I to unlock
-                </div>
-            </div>
 
-            <div class="act" style="opacity: 0.5;">
-                <div class="act-header">
-                    <div class="act-title">🔒 Act III: Frameworks (Coming Soon)</div>
+                <!-- N02: Arrays & Objects -->
+                <div class="scene-level current" data-scene="N02-arrays-objects" style="left: 430px; top: 310px;">
+                    <div class="level-circle">
+                        <span class="level-number">03</span>
+                        <div class="completion-ring"></div>
+                        <div class="current-pulse"></div>
+                    </div>
+                    <div class="level-info">
+                        <h3>Arrays & Objects</h3>
+                        <p>Data manipulation, functional programming</p>
+                        <div class="level-stats">
+                            <span class="status-badge current">NEXT</span>
+                            <span class="attempts">Ready to start</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="placeholder">
-                    Complete Act II to unlock
-                </div>
-            </div>
 
-            <div class="act" style="opacity: 0.5;">
-                <div class="act-header">
-                    <div class="act-title">🔒 Act IV: Projects (Coming Soon)</div>
+                <!-- N03: Async Programming -->
+                <div class="scene-level locked" data-scene="N03-async" style="left: 630px; top: 280px;">
+                    <div class="level-circle">
+                        <span class="level-number">04</span>
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="level-info">
+                        <h3>Async Programming</h3>
+                        <p>Promises, async/await, concurrency</p>
+                        <div class="level-stats">
+                            <span class="status-badge locked">LOCKED</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="placeholder">
-                    Complete Act III to unlock
+
+                <!-- N04: Error Handling -->
+                <div class="scene-level locked" data-scene="N04-error-handling" style="left: 830px; top: 260px;">
+                    <div class="level-circle">
+                        <span class="level-number">05</span>
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="level-info">
+                        <h3>Error Handling</h3>
+                        <p>try/catch, custom errors, resilience</p>
+                        <div class="level-stats">
+                            <span class="status-badge locked">LOCKED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- N05: Testing Fundamentals -->
+                <div class="scene-level locked" data-scene="N05-testing" style="left: 1030px; top: 240px;">
+                    <div class="level-circle">
+                        <span class="level-number">06</span>
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="level-info">
+                        <h3>Testing Fundamentals</h3>
+                        <p>Assertions, test frameworks</p>
+                        <div class="level-stats">
+                            <span class="status-badge locked">LOCKED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- N06: TDD Methodology -->
+                <div class="scene-level locked" data-scene="N06-tdd" style="left: 1130px; top: 260px;">
+                    <div class="level-circle">
+                        <span class="level-number">07</span>
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="level-info">
+                        <h3>TDD Methodology</h3>
+                        <p>Red-Green-Refactor cycle</p>
+                        <div class="level-stats">
+                            <span class="status-badge locked">LOCKED</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Level Panel Modal -->
-    <div class="level-panel" id="levelPanel">
-        <div class="panel-content">
-            <button class="close-btn" onclick="closeLevelPanel()">✕</button>
-            <div class="panel-header">
-                <h2 class="panel-title" id="panel-title">Level Title</h2>
-                <p class="panel-description" id="panel-description">Description</p>
-            </div>
-
-            <div class="panel-objectives">
-                <h3>🎯 Learning Objectives</h3>
-                <ul id="panel-objectives"></ul>
-            </div>
-
-            <div class="panel-objectives">
-                <h3>🏆 Challenge Criteria</h3>
-                <div id="panel-criteria">Loading...</div>
-            </div>
-
-            <div class="hints-counter">
-                <div class="hint-badge hint-used">H1: <span id="h1-count">0</span></div>
-                <div class="hint-badge hint-used">H2: <span id="h2-count">0</span></div>
-                <div class="hint-badge hint-available">H3: <span id="h3-count">0</span></div>
-            </div>
-
-            <div class="panel-actions">
-                <button class="btn btn-primary" id="start-level-btn" onclick="startLevel()">
-                    🚀 Start Level
-                </button>
-                <button class="btn btn-secondary" onclick="openInstructions()">
-                    📖 Open Instructions
-                </button>
-                <button class="btn btn-secondary" onclick="useHint()">
-                    💡 Use Hint
-                </button>
-                <button class="btn btn-secondary" onclick="copyCommand()">
-                    📋 Copy Command
-                </button>
-            </div>
+        <!-- Action Panel -->
+        <div class="action-panel">
+            <button class="action-btn primary" id="start-scene">
+                🚀 Start Next Scene
+            </button>
+            <button class="action-btn secondary" id="review-progress">
+                📊 View Details
+            </button>
+            <button class="action-btn secondary" id="get-help">
+                🆘 Get Help
+            </button>
         </div>
     </div>
 
+    <script src="js/roadmap-map.js"></script>
     <script src="roadmap.js"></script>
+    <script>
+        // Initialize the enhanced game-like roadmap
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Initialize the new game-like roadmap map
+                const roadmapMap = new RoadmapMap('roadmap-map-container', {
+                    enableAnimations: !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+                    enableTooltips: true,
+                    enableConfetti: true
+                });
+                
+                // Handle node clicks and integrate with existing roadmap.js functionality
+                document.getElementById('roadmap-map-container').addEventListener('nodeClick', function(event) {
+                    const { sceneId, nodeState } = event.detail;
+                    
+                    // Trigger existing roadmap.js functions if available
+                    if (typeof window.navigateToScene === 'function') {
+                        window.navigateToScene(sceneId);
+                    } else {
+                        // Fallback navigation
+                        console.log(`Navigate to scene: ${sceneId} (${nodeState})`);
+                        // Could integrate with CLI navigation here
+                    }
+                });
+                
+            } catch (error) {
+                console.warn('Failed to initialize enhanced roadmap map, showing fallback:', error);
+                // Show fallback static map
+                document.getElementById('roadmap-map-container').style.display = 'none';
+                document.getElementById('static-roadmap-fallback').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
