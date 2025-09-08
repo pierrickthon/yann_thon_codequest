@@ -114,13 +114,7 @@ module.exports = {
   toKebab,
   formatBytes,
   range,
-  zip,
   uniqueSorted,
   chunkArray,
-  median,
-  levenshtein,
-  shuffleDeterministic,
-  romanToInt,
-  intToRoman,
-  crc32
+  median
 };
