@@ -46,10 +46,10 @@
     },
     "N01-pure-functions": {
       "startTime": "2025-09-08T04:55:57.066Z",
-      "attempts": 3,
+      "attempts": 4,
       "status": "failed",
-      "timeSpent": 4,
-      "lastValidation": "2025-09-08T04:59:49.809Z"
+      "timeSpent": 185,
+      "lastValidation": "2025-09-08T08:01:03.233Z"
     },
     "N00-warmup-tutorial": {
       "startTime": "2025-09-08T05:47:39.034Z",
@@ -67,5 +67,5 @@
   "hintsUsed": {},
   "totalScore": 0,
   "studentId": "student",
-  "lastUpdated": "2025-09-08T05:47:48.847Z"
+  "lastUpdated": "2025-09-08T08:01:03.234Z"
 }
