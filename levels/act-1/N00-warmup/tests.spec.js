@@ -2,7 +2,7 @@
  * N00: System Check & Warm-up - Test Suite
  */
 
-const { getEnvironment, warmUp } = require('./starter/warmup');
+const { getEnvironment, warmUp } = require('./starter/index');
 
 const startTime = Date.now();
 let passed = 0;

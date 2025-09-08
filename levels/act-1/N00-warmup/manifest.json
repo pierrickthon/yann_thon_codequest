@@ -11,7 +11,7 @@
   "difficulty": "beginner",
   "tags": ["setup", "environment", "basics"],
   "files": {
-    "solution": "starter/warmup.js",
+    "solution": "starter/index.js",
     "test": "tests.spec.js",
     "readme": "README.md",
     "hints": "hints/"
