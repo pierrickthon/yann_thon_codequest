@@ -1,6 +1,6 @@
 {
   "currentAct": 1,
-  "currentScene": "N01-pure-functions",
+  "currentScene": "N02-destructuring",
   "completedScenes": [
     "N00-intro",
     "N01-functions"
@@ -50,10 +50,22 @@
       "status": "failed",
       "timeSpent": 4,
       "lastValidation": "2025-09-08T04:59:49.809Z"
+    },
+    "N00-warmup-tutorial": {
+      "startTime": "2025-09-08T05:47:39.034Z",
+      "attempts": 0,
+      "status": "started",
+      "timeSpent": 0
+    },
+    "N02-destructuring": {
+      "startTime": "2025-09-08T05:47:48.847Z",
+      "attempts": 0,
+      "status": "started",
+      "timeSpent": 0
     }
   },
   "hintsUsed": {},
   "totalScore": 0,
   "studentId": "student",
-  "lastUpdated": "2025-09-08T04:59:49.809Z"
+  "lastUpdated": "2025-09-08T05:47:48.847Z"
 }
