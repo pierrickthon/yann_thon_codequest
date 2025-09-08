@@ -1,0 +1,20 @@
+{
+  "id": "N15",
+  "title": "Unions & Type Guards",
+  "description": "Discriminated unions + guards, exhaustivité via never",
+  "estimatedTime": 20,
+  "difficulty": 3,
+  "concepts": [
+    "discriminated unions",
+    "type guards",
+    "never type",
+    "exhaustiveness"
+  ],
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  }
+}
+
+

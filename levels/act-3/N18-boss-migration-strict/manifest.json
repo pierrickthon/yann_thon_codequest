@@ -1,0 +1,21 @@
+{
+  "id": "N18",
+  "title": "Boss: Migration Strict",
+  "description": "Migration complète Acte I en TS strict niveau 3",
+  "estimatedTime": 30,
+  "difficulty": 4,
+  "concepts": [
+    "strict mode",
+    "migration",
+    "type guards",
+    "safe APIs"
+  ],
+  "isBoss": true,
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  }
+}
+
+

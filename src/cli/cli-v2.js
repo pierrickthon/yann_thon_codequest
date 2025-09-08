@@ -109,12 +109,27 @@ class CodeQuestCLI {
 
     // Copy starter to student workspace (idempotent)
     const starterPath = path.join(scenePath, 'starter');
+    const starterFilePath = path.join(scenePath, 'starter.js');
     const targetPath = path.join(this.studentWorkspace, 'current', normalizedId);
+    
+    if (!fs.existsSync(targetPath)) {
+      fs.mkdirSync(targetPath, { recursive: true });
+    }
     
     if (fs.existsSync(starterPath)) {
       const targetStarterPath = path.join(targetPath, 'starter');
       this.copyDir(starterPath, targetStarterPath);
       console.log(`✅ Starter code copied to student-workspace/current/${normalizedId}/starter/`);
+    }
+    
+    // Also copy top-level starter.js shim if present (tests often require it)
+    if (fs.existsSync(starterFilePath)) {
+      const targetStarterFile = path.join(targetPath, 'starter.js');
+      fs.copyFileSync(starterFilePath, targetStarterFile);
+    } else if (fs.existsSync(path.join(starterPath, 'index.js'))) {
+      // Create a small shim if only starter/index.js exists
+      const shim = "module.exports = require('./starter/index');\n";
+      fs.writeFileSync(path.join(targetPath, 'starter.js'), shim);
     }
 
     // Copy scene test file into student workspace so validation can run
@@ -123,6 +138,15 @@ class CodeQuestCLI {
     if (fs.existsSync(sceneTestPath)) {
       fs.copyFileSync(sceneTestPath, targetTestPath);
       console.log(`🧪 Tests copied: student-workspace/current/${normalizedId}/tests.spec.js`);
+    }
+
+    // Ensure solution shim exists in workspace if needed for validation rules
+    const solutionFilePath = path.join(scenePath, 'solution.js');
+    if (fs.existsSync(solutionFilePath)) {
+      fs.copyFileSync(solutionFilePath, path.join(targetPath, 'solution.js'));
+    } else if (fs.existsSync(path.join(scenePath, 'solution', 'index.js'))) {
+      const solutionShim = "module.exports = require('./solution/index');\n";
+      fs.writeFileSync(path.join(targetPath, 'solution.js'), solutionShim);
     }
 
     // Update progress.json
@@ -138,15 +162,31 @@ class CodeQuestCLI {
     }
     this.saveProgress(progress);
 
-    // Load and display manifest
+    // Load and display manifest (supports multiple schema variants)
     const manifestPath = path.join(scenePath, 'manifest.json');
     if (fs.existsSync(manifestPath)) {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      console.log(`\n📚 ${manifest.title}`);
-      console.log(`📝 ${manifest.description}`);
-      console.log(`⏱️  Estimated: ${manifest.estimatedMinutes} minutes`);
-      console.log(`\n🎯 Learning Objectives:`);
-      manifest.learningObjectives.forEach(obj => console.log(`  - ${obj}`));
+
+      const title = manifest.title || manifest.name || normalizedId;
+      const description = manifest.description || '';
+      const estimated = (
+        manifest.estimatedMinutes !== undefined ? manifest.estimatedMinutes :
+        manifest.estimatedTime !== undefined ? manifest.estimatedTime :
+        manifest.estimate
+      );
+      const objectives = Array.isArray(manifest.learningObjectives)
+        ? manifest.learningObjectives
+        : Array.isArray(manifest.objectives)
+          ? manifest.objectives
+          : [];
+
+      console.log(`\n📚 ${title}`);
+      if (description) console.log(`📝 ${description}`);
+      if (estimated !== undefined) console.log(`⏱️  Estimated: ${estimated} minutes`);
+      if (objectives.length) {
+        console.log(`\n🎯 Learning Objectives:`);
+        objectives.forEach(obj => console.log(`  - ${obj}`));
+      }
     }
 
     console.log(`\n📂 Work in: student-workspace/current/${normalizedId}/`);

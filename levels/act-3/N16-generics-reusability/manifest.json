@@ -1,0 +1,20 @@
+{
+  "id": "N16",
+  "title": "Generics & Reusability",
+  "description": "Fonctions/containers génériques avec contraintes",
+  "estimatedTime": 22,
+  "difficulty": 3,
+  "concepts": [
+    "generic functions",
+    "generic constraints",
+    "Result<T,E>",
+    "container types"
+  ],
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  }
+}
+
+

@@ -1,0 +1,20 @@
+{
+  "id": "N17",
+  "title": "Mapped & Utility Types",
+  "description": "Partial, Pick, Omit, mapped custom DeepReadonly",
+  "estimatedTime": 25,
+  "difficulty": 3,
+  "concepts": [
+    "utility types",
+    "mapped types",
+    "conditional types",
+    "deep transformations"
+  ],
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  }
+}
+
+

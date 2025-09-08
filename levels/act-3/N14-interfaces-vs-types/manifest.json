@@ -1,0 +1,27 @@
+{
+  "id": "N14",
+  "title": "Interfaces vs Types",
+  "description": "Composition, extension, readonly, intersection",
+  "estimatedTime": 18,
+  "difficulty": 2,
+  "concepts": [
+    "interfaces",
+    "type aliases",
+    "composition",
+    "readonly"
+  ],
+  "learningObjectives": [
+    "Choisir entre interface et type alias",
+    "Composer des types via intersection",
+    "Utiliser readonly et les options facultatives",
+    "Éviter la duplication de propriétés"
+  ],
+  "trophyCondition": "Pas de duplication (mapped type pour DRY)",
+  "files": {
+    "starter": "starter.ts",
+    "solution": "solution.ts",
+    "tests": "tests.spec.ts"
+  }
+}
+
+
