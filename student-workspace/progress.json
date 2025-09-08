@@ -1,6 +1,6 @@
 {
   "currentAct": 1,
-  "currentScene": "N02-destructuring",
+  "currentScene": "N00-warmup",
   "completedScenes": [
     "N00-intro",
     "N01-functions"
@@ -32,10 +32,10 @@
   "scenes": {
     "N00-warmup": {
       "startTime": "2025-09-07T23:32:21.572Z",
-      "attempts": 5,
-      "status": "base",
-      "timeSpent": 8,
-      "lastValidation": "2025-09-07T23:40:04.436Z"
+      "attempts": 7,
+      "status": "failed",
+      "timeSpent": 559,
+      "lastValidation": "2025-09-08T08:51:49.259Z"
     },
     "N06-boss-integration": {
       "startTime": "2025-09-08T04:51:46.711Z",
@@ -67,5 +67,5 @@
   "hintsUsed": {},
   "totalScore": 0,
   "studentId": "student",
-  "lastUpdated": "2025-09-08T08:01:03.234Z"
+  "lastUpdated": "2025-09-08T08:51:49.259Z"
 }
