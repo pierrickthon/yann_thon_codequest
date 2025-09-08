@@ -184,6 +184,52 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script>
+        try {
+            if (window.supabaseConfig) {
+                const sb = supabase.createClient(window.supabaseConfig.url, window.supabaseConfig.anonKey);
+                // Ensure table exists (assumes created in Supabase UI): progress(student_id text pk, scenes jsonb, current_scene text, total_score int, hints_used jsonb, updated_at timestamptz)
+                sb.channel('realtime:public:progress')
+                  .on('postgres_changes', { event: '*', schema: 'public', table: 'progress' }, payload => {
+                      sb.from('progress').select('*').then(({ data }) => {
+                          const snapshots = (data || []).map(row => ({
+                              studentId: row.student_id,
+                              scenes: row.scenes || {},
+                              currentScene: row.current_scene || null,
+                              totalScore: row.total_score || 0,
+                              hintsUsed: row.hints_used || {}
+                          }));
+                          if (window.controlRoom) {
+                              window.controlRoom.snapshots = snapshots;
+                              window.controlRoom.displayLoadedFiles([`${snapshots.length} students (Supabase live)`]);
+                              window.controlRoom.processSnapshots();
+                          }
+                      });
+                  })
+                  .subscribe();
+
+                // Initial load
+                sb.from('progress').select('*').then(({ data }) => {
+                    const snapshots = (data || []).map(row => ({
+                        studentId: row.student_id,
+                        scenes: row.scenes || {},
+                        currentScene: row.current_scene || null,
+                        totalScore: row.total_score || 0,
+                        hintsUsed: row.hints_used || {}
+                    }));
+                    if (window.controlRoom) {
+                        window.controlRoom.snapshots = snapshots;
+                        window.controlRoom.displayLoadedFiles([`${snapshots.length} students (Supabase live)`]);
+                        window.controlRoom.processSnapshots();
+                    }
+                });
+            }
+        } catch (e) {
+            console.warn('Supabase not configured for control room:', e);
+        }
+    </script>
     <script src="app.js"></script>
 </body>
 </html>

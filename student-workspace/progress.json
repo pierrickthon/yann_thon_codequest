@@ -1,1 +1,45 @@
-{"currentAct": 1, "currentScene": "N02-arrays-objects", "completedScenes": ["N00-intro", "N01-functions"], "stats": {"totalScore": 1250, "completionRate": 28.6, "streak": 3, "level": 2}, "sceneDetails": {"N00-intro": {"completed": true, "score": 650, "attempts": 1, "perfect": true}, "N01-functions": {"completed": true, "score": 600, "attempts": 2, "perfect": false}, "N02-arrays-objects": {"completed": false, "unlocked": true}}}
+{
+  "currentAct": 1,
+  "currentScene": "N00-warmup",
+  "completedScenes": [
+    "N00-intro",
+    "N01-functions"
+  ],
+  "stats": {
+    "totalScore": 1250,
+    "completionRate": 28.6,
+    "streak": 3,
+    "level": 2
+  },
+  "sceneDetails": {
+    "N00-intro": {
+      "completed": true,
+      "score": 650,
+      "attempts": 1,
+      "perfect": true
+    },
+    "N01-functions": {
+      "completed": true,
+      "score": 600,
+      "attempts": 2,
+      "perfect": false
+    },
+    "N02-arrays-objects": {
+      "completed": false,
+      "unlocked": true
+    }
+  },
+  "scenes": {
+    "N00-warmup": {
+      "startTime": "2025-09-07T23:32:21.572Z",
+      "attempts": 5,
+      "status": "base",
+      "timeSpent": 8,
+      "lastValidation": "2025-09-07T23:40:04.436Z"
+    }
+  },
+  "hintsUsed": {},
+  "totalScore": 0,
+  "studentId": "student",
+  "lastUpdated": "2025-09-07T23:40:04.436Z"
+}

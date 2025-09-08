@@ -47,7 +47,38 @@ class CodeQuestCLI {
     if (!fs.existsSync(this.progressFile)) {
       this.initProgress();
     }
-    return JSON.parse(fs.readFileSync(this.progressFile, 'utf8'));
+    try {
+      const raw = fs.readFileSync(this.progressFile, 'utf8');
+      const progress = JSON.parse(raw);
+
+      // Backward compatibility and hardening
+      if (!progress || typeof progress !== 'object') {
+        this.initProgress();
+        return JSON.parse(fs.readFileSync(this.progressFile, 'utf8'));
+      }
+
+      if (!progress.scenes || typeof progress.scenes !== 'object') {
+        // Migrate from legacy shape if present
+        progress.scenes = {};
+      }
+      if (!progress.hintsUsed || typeof progress.hintsUsed !== 'object') {
+        progress.hintsUsed = {};
+      }
+      if (typeof progress.totalScore !== 'number') {
+        progress.totalScore = 0;
+      }
+      if (!progress.studentId) {
+        progress.studentId = process.env.USER || 'student';
+      }
+
+      // Persist normalized structure so subsequent runs are stable
+      this.saveProgress(progress);
+      return progress;
+    } catch (e) {
+      // If parse fails, re-init to a safe default
+      this.initProgress();
+      return JSON.parse(fs.readFileSync(this.progressFile, 'utf8'));
+    }
   }
 
   saveProgress(progress) {

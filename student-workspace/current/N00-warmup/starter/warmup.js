@@ -14,10 +14,11 @@ function getEnvironment() {
   // - ready: true if node version >= 16
   
   // Your code here
+  const majorVersion = parseInt(process.version.slice(1).split('.')[0], 10);
   return {
     node: process.version,
     platform: process.platform,
-    ready: true
+    ready: majorVersion >= 16
   };
 }
 
@@ -30,6 +31,7 @@ function warmUp(name = 'Adventurer') {
   // TODO: Return "Welcome [name] to CodeQuest!"
   
   // Your code here
+  return `Welcome ${name} to CodeQuest!`;
 }
 
 // Don't forget to export your functions!

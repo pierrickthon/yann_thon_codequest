@@ -48,6 +48,8 @@ class RoadmapUI {
                 totalScore: 0,
                 hintsUsed: {}
             };
+            // Ensure UI and reporting still run when local fetch fails
+            this.updateUI();
         }
     }
 
@@ -140,6 +142,18 @@ class RoadmapUI {
         this.renderLevels();
         this.updateStats();
         
+        // After UI updates, send progress via Supabase reporter if available
+        try {
+            if (window.reportProgress && this.progress) {
+                window.reportProgress({
+                    scenes: this.progress.scenes || {},
+                    currentScene: this.progress.currentScene || null,
+                    totalScore: (this.progress.stats && this.progress.stats.totalScore) || 0,
+                    hintsUsed: this.progress.hintsUsed || {}
+                });
+            }
+        } catch (e) {}
+
         // Animate completed levels
         document.querySelectorAll('.level.completed').forEach(el => {
             if (!el.classList.contains('animated')) {

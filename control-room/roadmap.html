@@ -280,5 +280,35 @@
             }
         });
     </script>
+  <script>
+        // Minimal Supabase reporter hook only; no DOM/CSS changes
+        try {
+            if (window.supabaseConfig && typeof supabase !== 'undefined') {
+                const sb = supabase.createClient(window.supabaseConfig.url, window.supabaseConfig.anonKey);
+                const studentId = localStorage.getItem('codequest_student_id') || (function () {
+                    const id = 'student-' + Math.random().toString(36).slice(2, 8);
+                    localStorage.setItem('codequest_student_id', id);
+                    return id;
+                })();
+
+                window.reportProgress = async function(progress) {
+                    try {
+                        await sb.from('progress').upsert({
+                            student_id: studentId,
+                            scenes: progress.scenes || {},
+                            current_scene: progress.currentScene || null,
+                            total_score: progress.totalScore || 0,
+                            hints_used: progress.hintsUsed || {},
+                            updated_at: new Date().toISOString()
+                        });
+                    } catch (err) {
+                        console.warn('reportProgress (supabase) failed:', err);
+                    }
+                }
+            }
+        } catch (e) {
+            console.warn('Supabase not configured for student page:', e);
+        }
+    </script>
 </body>
 </html>

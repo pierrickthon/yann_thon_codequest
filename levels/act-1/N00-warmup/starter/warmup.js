@@ -12,7 +12,11 @@ function getEnvironment() {
   // - node: process.version (Node.js version)
   // - platform: process.platform (OS platform)
   // - ready: true if node version >= 16
-  
+  return {
+    node: process.version,
+    platform: process.platform,
+    ready: true
+  };
   // Your code here
 }
 
@@ -21,9 +25,9 @@ function getEnvironment() {
  * @param {string} name - The name to welcome
  * @returns {string} Welcome message
  */
-function warmUp(name = 'Adventurer') {
+function warmUp(name = 'Alice') {
   // TODO: Return "Welcome [name] to CodeQuest!"
-  
+  return `Welcome ${name} to CodeQuest!`;
   // Your code here
 }
 
