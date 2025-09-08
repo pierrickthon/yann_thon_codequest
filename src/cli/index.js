@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const TypeScriptManager = require('./typescript');
 const FastTracker = require('./fast-track');
 
@@ -167,7 +167,7 @@ class CodeQuestCLI {
     // Run tests if available
     if (fs.existsSync(testFile) && issues.length === 0) {
       try {
-        execSync(`node ${testFile}`, { cwd: scenePath });
+        execFileSync(process.execPath, [testFile], { cwd: scenePath, stdio: 'pipe' });
         status = 'bonus'; // Tests pass
         
         // Check for bonus criteria

@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 
 class CodeQuestCLI {
   constructor() {
@@ -223,8 +223,9 @@ class CodeQuestCLI {
     let testsPassed = false;
     let testOutput = '';
     try {
-      testOutput = execSync(`node ${testPath}`, { 
-        cwd: workPath, 
+      // Use execFileSync with argument array to handle Windows paths with spaces
+      testOutput = execFileSync(process.execPath, [testPath], {
+        cwd: workPath,
         encoding: 'utf8',
         stdio: 'pipe'
       });
