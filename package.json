@@ -14,7 +14,8 @@
     "test": "node src/test-runner.js",
     "control-room": "node src/control-room/server.js",
     "e2e:smoke": "node scripts/e2e-smoke.js",
-    "schema:check": "node scripts/cq-schema-check.js"
+    "schema:check": "node scripts/cq-schema-check.js",
+    "sync:act1": "node scripts/sync-act1.js"
   },
   "keywords": ["education", "gamification", "tdd", "javascript", "typescript"],
   "author": "CodeQuest Team",
