@@ -1,7 +1,7 @@
 # Guide Étudiant – CodeQuest 2.3 (Windows)
 
 Bienvenue dans CodeQuest, une plateforme ludique pour apprendre JavaScript/TypeScript avec la méthode TDD.
-Ce guide explique clairement les étapes pour installer, démarrer et valider vos scènes, en évitant les commandes avec `&&`.
+Ce guide explique clairement les étapes pour installer, démarrer et valider vos scènes, en évitant les commandes avec `&&` et sans utiliser la « Control Room » (réservée à l’enseignant). Les étudiants utilisent la page Roadmap et la CLI.
 
 ---
 
@@ -27,102 +27,100 @@ Dans PowerShell, placez-vous à la racine du projet CodeQuest puis exécutez:
 npm install
 npm link
 ```
-Si `cq` n’est pas reconnu après `npm link`, essayez:
+Si la commande CLI n’est pas disponible, vous pouvez aussi faire:
 ```powershell
 npm install -g .
 ```
-Vérifier que l’outil est installé:
+Vérifier que la CLI est accessible via npm scripts:
 ```powershell
-cq --help
+npm run cq
 ```
 
 ---
 
-## 3) Lancer l’interface « Control Room »
+## 3) Lancer une scène (création de l’espace de travail)
 
-Démarrez l’interface visuelle (carte de progression):
+Utilisez la CLI pour préparer votre espace de travail étudiant. Exemple avec la première scène « N00-warmup »:
 ```powershell
-npm run control-room
+npm run cq start N00-warmup
 ```
-Puis ouvrez votre navigateur à l’adresse: `http://localhost:3000/roadmap`
+Cela crée/copiera les fichiers nécessaires dans:
+```
+student-workspace\current\N00-warmup\
+```
+
+Éditez votre code dans:
+```
+student-workspace\current\N00-warmup\starter\index.js
+```
+(Il n’y a plus de `solution.js` à modifier.)
 
 ---
 
-## 4) Démarrer votre première scène
+## 4) Lancer les tests de la scène
 
-Deux chemins de travail existent selon le parcours:
-- Parcours « acts »: `acts/act1/N00-intro`
-- Parcours « levels »: `levels/act-1/N00-warmup-tutorial`
-
-Exemple (parcours acts):
+Après modification de `starter\index.js`, lancez les tests copiés dans l’espace de travail:
 ```powershell
-cd acts\act1\N00-intro
-type README.md
-```
-Ouvrez ensuite les fichiers indiqués (ex: `starter\index.js` ou `solution.js`) et complétez les TODO.
-
----
-
-## 5) Lancer les tests de la scène
-
-Selon la scène, le test peut s’appeler `test.js` (acts) ou `tests.spec.js` (levels):
-```powershell
-# Scènes avec test.js
-node test.js
-
-# Scènes avec tests.spec.js
-node tests.spec.js
+node student-workspace\current\N00-warmup\tests.spec.js
 ```
 Corrigez votre code jusqu’à obtenir « tous les tests passés ».
 
 ---
 
-## 6) Valider votre progression (CLI)
+## 5) Valider votre progression (via npm scripts)
 
-Revenez à la racine du projet puis validez:
+Validez avec la CLI via npm scripts pour éviter les soucis d’environnement:
 ```powershell
-cd ..\..\..\
-cq validate
+npm run cq validate N00-warmup
 ```
 Résultats possibles: Base, Bonus, Challenge.
 
 ---
 
-## 7) Demander de l’aide (hints)
+## 6) Demander de l’aide (hints)
 
-Si vous êtes bloqué:
+Si vous êtes bloqué, demandez de l’aide contextuelle (via npm scripts):
 ```powershell
-cq help-me N00-intro
+npm run cq help-me N00-warmup
 ```
-Remplacez `N00-intro` par l’identifiant de votre scène.
+
+---
+
+## 7) Voir la Roadmap (étudiants)
+
+La page Roadmap permet de visualiser votre progression. Elle est généralement servie par l’environnement de cours. Si votre enseignant l’a lancée, ouvrez:
+```
+http://localhost:3000/roadmap
+```
+(Si aucun serveur n’est disponible, concentrez-vous sur la CLI et les tests en local.)
 
 ---
 
 ## 8) Bonnes pratiques
 
-- Lisez le `README.md` de la scène puis le fichier de test pour comprendre les attentes.
-- Exécutez les tests fréquemment.
-- Validez régulièrement avec `cq validate` depuis la racine.
+- Lisez les consignes de la scène (fichiers `README.md`/`manifest.json`) et ouvrez les tests pour comprendre les attentes.
+- Travaillez dans `student-workspace\current\<scene>\starter\`.
+- Testez souvent avec `node ...\tests.spec.js`.
+- Validez régulièrement avec `npm run cq validate <scene>`.
 - (Optionnel) Utilisez Git: une branche par scène.
 
 Exemple Git:
 ```powershell
-git checkout -b scene/N00-intro
+git checkout -b scene/N00-warmup
 # travail...
 git add .
-git commit -m "Complete N00-intro"
+git commit -m "Complete N00-warmup"
 ```
 
 ---
 
 ## 9) Dépannage rapide (Windows)
 
-- « cq n’est pas reconnu »: refaire `npm link`, ou `npm install -g .`, puis relancer PowerShell.
-- Port 3000 occupé:
+- « CLI indisponible »: refaire `npm link`, ou `npm install -g .`, puis relancer PowerShell. Utilisez toujours `npm run cq ...` dans ce guide.
+- Port 3000 (Roadmap) occupé: (si l’enseignant a lancé un serveur)
 ```powershell
 netstat -ano | findstr :3000
 taskkill /PID <PID> /F
-npm run control-room
 ```
 - Exécution bloquée (ExecutionPolicy):
 ```powershell
@@ -141,27 +139,24 @@ Installation:
 ```powershell
 npm install
 npm link
-cq --help
+npm run cq
 ```
-Lancer l’interface:
+Préparer la scène:
 ```powershell
-npm run control-room
-# Ouvrir: http://localhost:3000/roadmap
+npm run cq start N00-warmup
 ```
-Première scène (acts):
+Éditer et tester:
 ```powershell
-cd acts\act1\N00-intro
-type README.md
-node test.js
+# Éditez: student-workspace\current\N00-warmup\starter\index.js
+node student-workspace\current\N00-warmup\tests.spec.js
 ```
-Validation (depuis la racine):
+Validation:
 ```powershell
-cd ..\..\..\
-cq validate
+npm run cq validate N00-warmup
 ```
 Aide:
 ```powershell
-cq help-me N00-intro
+npm run cq help-me N00-warmup
 ```
 
 Bon apprentissage et amusez-vous bien avec CodeQuest ! 🚀
