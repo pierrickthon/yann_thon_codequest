@@ -85,10 +85,6 @@ function range(start, end, step = 1) {
   // TODO: Retourner un tableau [start, start+step, ..., <= end]
 }
 
-function zip(a, b) {
-  // TODO: Zipper deux tableaux de même longueur → [[a0,b0],[a1,b1],...]
-}
-
 function uniqueSorted(arr) {
   // TODO: Retourner valeurs uniques triées (asc)
 }
@@ -101,26 +97,6 @@ function median(arr) {
   // TODO: Retourner la médiane (tableau non vide)
 }
 
-// Complexes
-function levenshtein(a, b) {
-  // TODO: Distance d'édition (Levenshtein) entre deux chaînes
-}
-
-function shuffleDeterministic(arr, seed) {
-  // TODO: Mélange pseudo-aléatoire déterministe d'après seed (LCG)
-}
-
-function romanToInt(s) {
-  // TODO: Convertir un nombre romain en entier
-}
-
-function intToRoman(n) {
-  // TODO: Convertir un entier (1..3999) en chiffre romain
-}
-
-function crc32(str) {
-  // TODO: Calculer CRC32 d'une chaîne (implémentation pure)
-}
 
 // Don't forget to export your functions!
 module.exports = {
